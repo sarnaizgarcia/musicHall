@@ -1,4 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:host {
+  --primary-color: #ffab00;
+  --dark-primary-color: #e69a01;
+  --secondary-color: #0054ff;
+  --dark-secondary-color: #0242c6;
+  --danger-color: #cf390a;
+  --success-color: #34b910;
+  --font-size-huge: 45px;
+  --font-size-big: 36px;
+  --font-size-normal: 24px;
+  --font-size-small: 18px;
+  --font-size-little: 12px;
+  --border-round: 4px;
+  --modal-sadow-box: #000000 5px 10px 10px 3px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url(assets/img/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000000;
+}
