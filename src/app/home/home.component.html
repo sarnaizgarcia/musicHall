@@ -1,5 +1,7 @@
-<mh-menu-button
-  [menuOptions]="options"
+<mh-nav-bar
+  [options]="options"
   (optionSelected)="eventFired($event)"
+  (goingBack)="eventFired()"
   >
-</mh-menu-button>
+
+</mh-nav-bar>

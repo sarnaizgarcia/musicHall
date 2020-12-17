@@ -7,12 +7,14 @@ import { HomeLogoComponent } from './home-logo';
 import { MenuOptionComponent } from './menu-option';
 import { MenuListComponent } from './menu-list';
 import { MenuButtonComponent } from './menu-button';
+import { NavBarComponent } from './nav-bar';
 
 const components = [
   HomeLogoComponent,
   MenuOptionComponent,
   MenuListComponent,
-  MenuButtonComponent
+  MenuButtonComponent,
+  NavBarComponent
 ];
 
 @NgModule({

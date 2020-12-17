@@ -1,0 +1,34 @@
+.main-nav-bar {
+  width: 100%;
+  height: 67px;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-space {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.title {
+  font-size: var(--font-size-huge);
+  color: var(--font-color-on-secondary);
+}
+
+.right-space {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+}
+
+@media (min-width: 800px) {
+  .right-space {
+    width: 140px;
+  }
+}

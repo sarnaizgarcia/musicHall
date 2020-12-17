@@ -1,0 +1,24 @@
+<nav class="main-nav-bar">
+  <div class="left-space">
+    <span
+      class="back-arrow"
+      *ngIf="showBack"
+      >
+      <img
+        src="../../../assets/img/back-arrow.png"
+        alt="back arrow"
+        (click)="onClickGoingBack()"
+        tabindex="0"
+        (keyup)="onEnterGoingBack($event)"
+      />
+    </span>
+    <span class="title">{{title}}</span>
+  </div>
+  <div class="right-space">
+    <mh-menu-button
+      [menuOptions]="options"
+      (optionSelected)="sendOption($event)"
+      >
+  </mh-menu-button>
+  </div>
+</nav>

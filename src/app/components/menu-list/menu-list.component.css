@@ -6,9 +6,12 @@
   background-color: var(--default-background-color);
   border-radius: var(--border-round);
   box-shadow: var(--modal-shadow-box);
+  left: auto;
+  right: 27px;
 }
 @media (min-width: 800px) {
   .menu-list {
     width: 172px;
+    right: 30px;
   }
 }
