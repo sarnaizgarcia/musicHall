@@ -1,0 +1,13 @@
+.main-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 118px;
+}
+
+@media (min-width: 800px) {
+  .main-content {
+    margin-top: 213px;
+  }
+}

@@ -1,6 +1,12 @@
 <mh-nav-bar
   [options]="options"
-  (optionSelected)="eventFired($event)"
-  (goingBack)="eventFired()"
+  (optionSelected)="navigate($event)"
   >
 </mh-nav-bar>
+<div class="main-content">
+  <mh-home-logo
+    (logoAction)="navigate('artist')"
+    >
+
+  </mh-home-logo>
+</div>

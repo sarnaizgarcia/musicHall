@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { OptionType } from '../components';
 
 @Component({
@@ -8,9 +10,18 @@ import { OptionType } from '../components';
 })
 
 export class HomeComponent {
+
   public options: OptionType[] = [OptionType.ARTIST, OptionType.ALBUM];
 
-  public eventFired(event?: any) {
-    console.log('Event fired: ', event);
+  constructor(private router: Router) {}
+
+  public navigate(page: string) {
+    switch(page) {
+      case OptionType.ARTIST:
+        this.router.navigateByUrl('/artist');
+        break;
+      case OptionType.ALBUM:
+        this.router.navigateByUrl('/album');
+    }
   }
 }
