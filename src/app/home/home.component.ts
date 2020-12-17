@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class HomeComponent {
+  public eventFired(event?: Event) {
+    console.log('Event fired: ', event);
+  }
 }

@@ -1,0 +1,15 @@
+.main-logo {
+  width: 346px;
+  height: 346px;
+  background-image: url("../../../assets/img/logo-mobile.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 800px) {
+  .main-logo {
+    width: 435px;
+    height: 529px;
+    background-image: url("../../../assets/img/logo-laptop.png");
+  }
+}
