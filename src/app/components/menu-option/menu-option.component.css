@@ -5,6 +5,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  border-bottom: solid 1px var(--secondary-color);
+  margin-bottom: 50px;
 }
 
 .icon {
@@ -31,6 +34,7 @@
 @media (min-width: 800px) {
   .menu-option {
     height: 33px;
+    margin-bottom: 20px;
   }
 
   .icon {

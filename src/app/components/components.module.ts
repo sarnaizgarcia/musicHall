@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { HomeLogoComponent } from './home-logo';
 import { MenuOptionComponent } from './menu-option';
+import { MenuListComponent } from './menu-list';
 
 const components = [
   HomeLogoComponent,
-  MenuOptionComponent
+  MenuOptionComponent,
+  MenuListComponent
 ];
 
 @NgModule({

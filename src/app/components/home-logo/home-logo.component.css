@@ -4,6 +4,7 @@
   background-image: url("../../../assets/img/logo-mobile.png");
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 @media (min-width: 800px) {

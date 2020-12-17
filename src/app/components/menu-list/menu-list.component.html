@@ -1,0 +1,8 @@
+<div class="menu-list">
+  <mh-menu-option
+    *ngFor="let option of listOptions"
+    [icon]="option"
+    (actionOnMenuOption)="onOptionSelected($event)"
+    >
+  </mh-menu-option>
+</div>

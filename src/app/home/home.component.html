@@ -1,5 +1,5 @@
-<mh-menu-option
-  (actionOnMenuOption)="eventFired($event)"
-  icon="album"
+<mh-menu-list
+  [listOptions]="options"
+  (optionSelected)="eventFired($event)"
   >
-</mh-menu-option>
+</mh-menu-list>

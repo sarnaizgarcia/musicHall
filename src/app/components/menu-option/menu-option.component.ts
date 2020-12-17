@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+import { OptionType } from './menu-option.entities';
+
 @Component({
   selector: 'mh-menu-option',
   templateUrl: './menu-option.component.html',
@@ -7,7 +9,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MenuOptionComponent {
   @Input()
-  public icon: 'artist' | 'album' = 'artist';
+  public icon: OptionType = OptionType.ARTIST;
 
   @Output()
   public actionOnMenuOption: EventEmitter<string> =  new EventEmitter<string>();

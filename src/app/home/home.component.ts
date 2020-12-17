@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OptionType } from '../components';
 
 @Component({
   selector: 'mh-home',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 
 export class HomeComponent {
+  public options: OptionType[] = [OptionType.ARTIST, OptionType.ALBUM];
+
   public eventFired(event?: any) {
     console.log('Event fired: ', event);
   }
