@@ -1,0 +1,9 @@
+.menu-icon {
+  color: white;
+  font-size: var(--font-size-huge);
+  cursor: pointer;
+}
+
+.menu-icon:hover {
+  transform: scale(1.1);
+}

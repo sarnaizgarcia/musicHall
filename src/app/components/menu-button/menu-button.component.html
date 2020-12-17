@@ -1,0 +1,24 @@
+<div
+  class="menu-button"
+  >
+  <mat-icon
+    tabindex="0"
+    aria-hidden="false"
+    aria-label="navigation menu"
+    class="menu-icon"
+    (click)="clickOnButton()"
+    (keyup)="enterOnButton($event)"
+    id="menu-button"
+  >menu</mat-icon>
+  <div
+    class="options-list"
+    [@openClose]
+    *ngIf="open"
+    >
+    <mh-menu-list
+      [listOptions]="menuOptions"
+      (optionSelected)="onOptionSelected($event)"
+      >
+    </mh-menu-list>
+  </div>
+</div>

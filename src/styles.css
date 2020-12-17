@@ -15,7 +15,7 @@
   --font-color-on-primary: #ffffff;
   --font-color-on-secondary: #ffffff;
   --border-round: 4px;
-  --modal-sadow-box: #000000 5px 10px 10px 3px;
+  --modal-shadow-box: #000000 3px 1px 10px 1px;
   --default-background-color: #ffffff;
   --font-color-on-default-background: #000000;
 }

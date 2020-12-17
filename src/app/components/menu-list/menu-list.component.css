@@ -1,8 +1,11 @@
 .menu-list {
+  position: absolute;
+  z-index: 100;
   width: 250px;
   padding: 10px 10px 1px 10px;
   background-color: var(--default-background-color);
   border-radius: var(--border-round);
+  box-shadow: var(--modal-shadow-box);
 }
 @media (min-width: 800px) {
   .menu-list {

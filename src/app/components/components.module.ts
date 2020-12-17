@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { HomeLogoComponent } from './home-logo';
 import { MenuOptionComponent } from './menu-option';
 import { MenuListComponent } from './menu-list';
+import { MenuButtonComponent } from './menu-button';
 
 const components = [
   HomeLogoComponent,
   MenuOptionComponent,
-  MenuListComponent
+  MenuListComponent,
+  MenuButtonComponent
 ];
 
 @NgModule({
   declarations: [ ...components ],
-  imports: [ CommonModule, FormsModule ],
+  imports: [ CommonModule, FormsModule, MatIconModule ],
   exports: [ ...components ],
 })
 export class ComponentsModule {}
