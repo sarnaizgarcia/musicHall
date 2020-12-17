@@ -1,0 +1,53 @@
+.menu-option {
+  background-color: var(--default-background-color);
+  width: 100%;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  width: 34px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.icon.artist {
+  height: 49px;
+  background-image: url("../../../assets/img/singer-option-mobile.png");
+}
+
+.icon.album {
+  height: 34px;
+  background-image: url("../../../assets/img/album-option-mobile.png");
+}
+
+.text {
+  font-size: var(--font-size-big);
+  color: var(--font-color-on-default-background);
+}
+
+@media (min-width: 800px) {
+  .menu-option {
+    height: 33px;
+  }
+
+  .icon {
+    width: 20px;
+  }
+
+  .icon.artist {
+    height: 29px;
+    background-image: url("../../../assets/img/singer-option-laptop.png");
+  }
+
+  .icon.album {
+    height: 20px;
+    background-image: url("../../../assets/img/album-option-laptop.png");
+  }
+
+  .text {
+    font-size: var(--font-size-normal);
+  }
+}

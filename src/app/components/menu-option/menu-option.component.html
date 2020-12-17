@@ -1,0 +1,9 @@
+<div
+  class="menu-option"
+  (click)="clickOnOption()"
+  (keyup)="enterOnOption($event)"
+  tabindex="0"
+>
+  <div class="icon" [ngClass]="[icon]"></div>
+  <div class="text">{{text}}</div>
+</div>

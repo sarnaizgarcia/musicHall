@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { HomeLogoComponent } from './home-logo';
+import { MenuOptionComponent } from './menu-option';
 
 const components = [
   HomeLogoComponent,
+  MenuOptionComponent
 ];
 
 @NgModule({
