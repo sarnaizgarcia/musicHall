@@ -8,13 +8,15 @@ import { MenuOptionComponent } from './menu-option';
 import { MenuListComponent } from './menu-list';
 import { MenuButtonComponent } from './menu-button';
 import { NavBarComponent } from './nav-bar';
+import { NiceInputComponent } from './nice-input';
 
 const components = [
   HomeLogoComponent,
   MenuOptionComponent,
   MenuListComponent,
   MenuButtonComponent,
-  NavBarComponent
+  NavBarComponent,
+  NiceInputComponent
 ];
 
 @NgModule({
