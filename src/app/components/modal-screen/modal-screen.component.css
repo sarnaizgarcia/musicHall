@@ -1,9 +1,16 @@
 .modal-screen {
   width: 100%;
-  background-color: rgba(255, 171, 0, 0.7);
+  background-color: rgba(255, 171, 0, 0.3);
   position: absolute;
   z-index: 300;
   display: flex;
   justify-content: center;
   height: 200vh;
+}
+
+@media (min-width: 920px) {
+  .modal-screen {
+    display: flex;
+    justify-content: center;
+  }
 }

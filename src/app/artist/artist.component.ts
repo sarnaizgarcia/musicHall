@@ -10,7 +10,7 @@ import { ModalTypes } from '../components';
 
 export class ArtistComponent {
 
-  public modalType = ModalTypes.WANRING;
+  public modalType = ModalTypes.NEUTRAL;
 
   public logEvent(event?: any) {
     console.log('NNN event: ', event);

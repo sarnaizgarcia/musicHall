@@ -1,5 +1,6 @@
 import { Component,
   ElementRef,
+  Input,
   EventEmitter,
   OnDestroy,
   OnInit,
@@ -23,7 +24,9 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   @ViewChild('fileDropRef')
   public inputFile: ElementRef | undefined;
 
-  public imageContent: string | ArrayBuffer | null = null;
+  @Input()
+  public imageContent: string | null = null;
+  
   public reader = new FileReader();
   private fileSelected: File | undefined;
   private context = this.getImageContent.bind(this);

@@ -1,0 +1,45 @@
+.artist-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fields-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.upload {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.field {
+  margin-bottom: 50px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button {
+  margin: 0px 25px;
+}
+
+@media (min-width: 920px) {
+  .artist-form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .upload {
+    width: 30%;
+  }
+
+  .fields-form {
+    width: 70%;
+  }
+}

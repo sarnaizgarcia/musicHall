@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
 import { HomeLogoComponent } from './home-logo';
@@ -17,6 +17,7 @@ import { ModalScreenComponent } from './modal-screen';
 import { LoadingComponent } from './loading';
 import { ModalWindowComponent } from './modal-window';
 import { UploadFileComponent, DragnDropDirective } from './upload-file';
+import { ArtistFormComponent } from './artist-form';
 
 const components = [
   HomeLogoComponent,
@@ -32,12 +33,13 @@ const components = [
   ModalScreenComponent,
   LoadingComponent,
   ModalWindowComponent,
-  UploadFileComponent
+  UploadFileComponent,
+  ArtistFormComponent
 ];
 
 @NgModule({
   declarations: [ ...components, DragnDropDirective ],
-  imports: [ CommonModule, FormsModule, MatIconModule ],
+  imports: [ CommonModule, FormsModule, MatIconModule, ReactiveFormsModule ],
   exports: [ ...components, FormsModule ],
 })
 export class ComponentsModule {}

@@ -26,6 +26,7 @@
   color: var(--font-color-on-neutral);
   font-size: var(--font-size-big);
   margin: 7px 20px 20px 20px;
+  cursor: pointer;
 }
 
 .modal-window.neutral .close-button {

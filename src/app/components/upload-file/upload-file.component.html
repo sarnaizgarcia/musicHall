@@ -1,9 +1,5 @@
-<input
-  type="file"
-  #fileDropRef
-  id="fileDropRef"
-  class="file-input"
-  (change)="onInputFileChange($event)"/>
+<div class="fileUpload">
+  <input type="file" #fileDropRef id="fileDropRef" class="file-input" (change)="onInputFileChange($event)"/>
   <div
     class="dragdropZone"
     mh-dnd
@@ -11,15 +7,12 @@
     (fileDropped)="onFileDropped($event)"
     (click)="clickOnFileUpload()"
     (keyup)="enterOnFileUpload($event)"
-    >
-    <img
-      class="image-selected"
-      [src]="imageContent"
-      alt="image selected"
-      *ngIf="imageContent; else text" />
+  >
+    <img class="image-selected" [src]="imageContent" alt="image selected" *ngIf="imageContent; else text" />
     <ng-template #text>
       <div class="text">
-        Drop image here or click to upload from your device
+        Drop image here or click to upload from your device*
       </div>
     </ng-template>
   </div>
+</div>
