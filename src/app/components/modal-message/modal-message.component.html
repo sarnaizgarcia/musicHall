@@ -1,0 +1,32 @@
+<div class="message-modal" [ngClass]="[messageType]">
+  <div class="image"></div>
+  <div class="message">
+    <div class="text">
+      {{message}}
+    </div>
+    <div class="buttons">
+      <ng-container *ngIf="validateAnswer; else elseTemplate">
+        <mh-nice-button [color]="buttonNeutralColor" [size]="buttonSizeSmall" class="button">
+          <button
+            type="button"
+            (click)="clickOnButton(false)"
+          >No</button>
+        </mh-nice-button>
+        <mh-nice-button [color]="buttonPrimaryColor" [size]="buttonSizeSmall" class="button">
+          <button
+            type="button"
+            (click)="clickOnButton(true)"
+          >Yes</button>
+        </mh-nice-button>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <mh-nice-button [color]="buttonPrimaryColor" [size]="buttonSizeBig" class="button">
+          <button
+            type="button"
+            (click)="clickOnButton(false)"
+          >Close</button>
+        </mh-nice-button>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import { LoadingComponent } from './loading';
 import { ModalWindowComponent } from './modal-window';
 import { UploadFileComponent, DragnDropDirective } from './upload-file';
 import { ArtistFormComponent } from './artist-form';
+import { ModalMessage } from './modal-message';
 
 const components = [
   HomeLogoComponent,
@@ -34,7 +35,8 @@ const components = [
   LoadingComponent,
   ModalWindowComponent,
   UploadFileComponent,
-  ArtistFormComponent
+  ArtistFormComponent,
+  ModalMessage
 ];
 
 @NgModule({

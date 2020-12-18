@@ -10,7 +10,7 @@ import { ModalTypes, ArtistDefaultData } from '../components';
 
 export class ArtistComponent {
 
-  public modalType = ModalTypes.NEUTRAL;
+  public modalType = ModalTypes.WANRING;
 
   public artistData: ArtistDefaultData = {
     artistName: 'Papa Noel',

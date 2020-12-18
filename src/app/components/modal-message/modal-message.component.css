@@ -1,0 +1,57 @@
+.message-modal {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.image {
+  width: 88px;
+  height: 126px;
+  background-image: url("../../../assets/img/singer-modal.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message-modal.warning .image {
+  background-image: url("../../../assets/img/crazy-modal.png");
+  width: 239px;
+  height: 214px;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 22px 0px;
+}
+
+.text {
+  color: var(--font-color-on-neutral);
+  font-size: var(--font-size-big);
+  margin-bottom: 113px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  margin: 0px 25px;
+}
+
+@media (min-width: 920px) {
+  .message-modal {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .message {
+    width: 70%;
+  }
+}
