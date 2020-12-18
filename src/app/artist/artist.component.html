@@ -1,4 +1,16 @@
 <mh-modal-screen [show]="true">
-  <mh-loading></mh-loading>
+  <mh-modal-window (closeWindow)="logEvent()" [modalType]="modalType">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Sed quis ante in enim bibendum fermentum mattis ut mauris.
+    Cras a nunc sit amet metus molestie aliquam.
+    Aenean sodales nisi in nibh lacinia, a malesuada lorem hendrerit.
+    Nunc in efficitur erat. Duis dignissim elit id gravida faucibus. Maecenas nec efficitur lectus.
+    Suspendisse tincidunt commodo enim, ac semper sapien luctus ac.
+    Aenean condimentum enim a massa maximus, vel tincidunt turpis placerat.
+    Curabitur ut bibendum turpis, quis commodo sem. Sed sed lectus et nisl pretium tempor.
+    Aliquam ut diam diam. Nullam id tortor sit amet leo imperdiet semper.
+    Quisque a venenatis velit. Curabitur laoreet leo lacus, sit amet aliquet ex dictum non.
+    Duis a ipsum dapibus, suscipit felis sed, vulputate sem. Ut tempor dui ac auctor varius.
+  </mh-modal-window>
 </mh-modal-screen>
 <mh-separator (newElement)="logEvent()"></mh-separator>

@@ -18,7 +18,7 @@
   align-items: center;
   position: absolute;
   z-index: 100;
-  box-shadow: var(--modal-sadow-box);
+  box-shadow: var(--modal-shadow-box);
   margin: 0px;
   padding: 0px;
 }

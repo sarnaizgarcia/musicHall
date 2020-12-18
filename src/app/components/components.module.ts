@@ -15,6 +15,7 @@ import { SearchArtistFormComponent } from './search-artist-form';
 import { SeparatorComponent } from './separator';
 import { ModalScreenComponent } from './modal-screen';
 import { LoadingComponent } from './loading';
+import { ModalWindowComponent } from './modal-window';
 
 const components = [
   HomeLogoComponent,
@@ -28,7 +29,8 @@ const components = [
   SearchArtistFormComponent,
   SeparatorComponent,
   ModalScreenComponent,
-  LoadingComponent
+  LoadingComponent,
+  ModalWindowComponent
 ];
 
 @NgModule({

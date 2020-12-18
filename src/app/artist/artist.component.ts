@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ButtonColors, ButtonSizes } from '../components';
+import { ModalTypes } from '../components';
 
 @Component({
   selector: 'mh-artist',
@@ -9,6 +9,9 @@ import { ButtonColors, ButtonSizes } from '../components';
 })
 
 export class ArtistComponent {
+
+  public modalType = ModalTypes.WANRING;
+
   public logEvent(event?: any) {
     console.log('NNN event: ', event);
   }

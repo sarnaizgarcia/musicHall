@@ -1,0 +1,15 @@
+<div class="modal-window"[ngClass]="[modalType]">
+  <div class="header">
+    <mat-icon
+      tabindex="0"
+      aria-hidden="false"
+      aria-label="close window"
+      class="close-button"
+      (click)="clickOnCloseButton()"
+      (keyup)="enterOnCloseButton($event)"
+      >highlight_off</mat-icon>
+  </div>
+  <div class="body">
+    <ng-content></ng-content>
+  </div>
+</div>
