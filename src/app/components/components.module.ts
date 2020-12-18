@@ -16,6 +16,7 @@ import { SeparatorComponent } from './separator';
 import { ModalScreenComponent } from './modal-screen';
 import { LoadingComponent } from './loading';
 import { ModalWindowComponent } from './modal-window';
+import { UploadFileComponent, DragnDropDirective } from './upload-file';
 
 const components = [
   HomeLogoComponent,
@@ -30,11 +31,12 @@ const components = [
   SeparatorComponent,
   ModalScreenComponent,
   LoadingComponent,
-  ModalWindowComponent
+  ModalWindowComponent,
+  UploadFileComponent
 ];
 
 @NgModule({
-  declarations: [ ...components ],
+  declarations: [ ...components, DragnDropDirective ],
   imports: [ CommonModule, FormsModule, MatIconModule ],
   exports: [ ...components, FormsModule ],
 })
