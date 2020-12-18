@@ -9,7 +9,7 @@ import { ButtonColors, ButtonSizes } from '../components';
 })
 
 export class ArtistComponent {
-  public color = ButtonColors.PRIMARY;
-
-  public size = ButtonSizes.BIG;
+  public logEvent(event: any) {
+    console.log('NNN event: ', event);
+  }
 }

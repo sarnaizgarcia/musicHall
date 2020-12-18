@@ -1,0 +1,17 @@
+<div class="form-container">
+  <form class="search-form" (submit)="onSubmit($event)">
+    <div class="search-input">
+      <mh-nice-input label="Search artist by name">
+        <input
+          type="text"
+          name="artist-name"
+          [(ngModel)]="searchArtistName"/>
+      </mh-nice-input>
+    </div>
+    <div class="search-button">
+      <mh-nice-button [color]="buttonColor" [size]="buttonSize">
+        <button type="submit">Search</button>
+      </mh-nice-button>
+    </div>
+  </form>
+</div>
