@@ -9,7 +9,7 @@ import { ButtonColors, ButtonSizes } from '../components';
 })
 
 export class ArtistComponent {
-  public logEvent(event: any) {
+  public logEvent(event?: any) {
     console.log('NNN event: ', event);
   }
 }

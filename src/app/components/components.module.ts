@@ -12,6 +12,7 @@ import { NiceInputComponent } from './nice-input';
 import { AutocompleteComponent } from './autocomplete';
 import { NiceButtonComponent } from './nice-button';
 import { SearchArtistFormComponent } from './search-artist-form';
+import { SeparatorComponent } from './separator';
 
 const components = [
   HomeLogoComponent,
@@ -22,7 +23,8 @@ const components = [
   NiceInputComponent,
   AutocompleteComponent,
   NiceButtonComponent,
-  SearchArtistFormComponent
+  SearchArtistFormComponent,
+  SeparatorComponent
 ];
 
 @NgModule({

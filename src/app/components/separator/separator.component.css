@@ -1,0 +1,17 @@
+.separator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.line {
+  width: 90%;
+  border-bottom: solid 3px var(--secondary-color);
+}
+
+.add-button {
+  width: 10%;
+  font-size: var(--font-size-big);
+  color: var(--secondary-color);
+}
