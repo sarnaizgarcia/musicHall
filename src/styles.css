@@ -7,6 +7,7 @@
   --dark-secondary-color: #0242c6;
   --danger-color: #cf390a;
   --error-color: #ff0000;
+  --neutral-color: #000000;
   --success-color: #34b910;
   --font-size-huge: 45px;
   --font-size-big: 36px;
@@ -15,6 +16,7 @@
   --font-size-little: 12px;
   --font-color-on-primary: #ffffff;
   --font-color-on-secondary: #ffffff;
+  --font-color-on-neutral: #ffffff;
   --border-round: 4px;
   --modal-shadow-box: #000000 3px 1px 10px 1px;
   --default-background-color: #ffffff;

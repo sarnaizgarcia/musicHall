@@ -10,6 +10,7 @@ import { MenuButtonComponent } from './menu-button';
 import { NavBarComponent } from './nav-bar';
 import { NiceInputComponent } from './nice-input';
 import { AutocompleteComponent } from './autocomplete';
+import { NiceButtonComponent } from './nice-button';
 
 const components = [
   HomeLogoComponent,
@@ -18,7 +19,8 @@ const components = [
   MenuButtonComponent,
   NavBarComponent,
   NiceInputComponent,
-  AutocompleteComponent
+  AutocompleteComponent,
+  NiceButtonComponent
 ];
 
 @NgModule({

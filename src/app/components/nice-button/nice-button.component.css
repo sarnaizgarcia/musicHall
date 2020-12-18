@@ -1,0 +1,60 @@
+.nice-button::ng-deep button {
+  font-size: var(--font-size-small);
+  border-radius: var(--border-round);
+  cursor: pointer;
+}
+
+.nice-button::ng-deep button:hover {
+  transform: scale(1.1);
+}
+
+.nice-button.disabled::ng-deep button {
+  cursor: no-drop;
+}
+
+.nice-button.disabled::ng-deep button:hover {
+  transform: scale(0.9);
+}
+
+.nice-button.primary::ng-deep button {
+  background-color: var(--primary-color);
+  color: var(--font-color-on-primary);
+}
+
+.nice-button.primary::ng-deep button:focus {
+  outline: none;
+  border: solid 3px var(--secondary-color);
+}
+
+.nice-button.primary.disabled::ng-deep button {
+  background-color: var(--dark-primary-color);
+}
+
+.nice-button.neutral::ng-deep button {
+  background-color: var(--neutral-color);
+  color: var(--font-color-on-neutral);
+}
+
+.nice-button.secondary::ng-deep button {
+  background-color: var(--secondary-color);
+  color: var(--font-color-on-secondary);
+}
+
+.nice-button.secondary::ng-deep button:focus {
+  outline: none;
+  border: solid 3px var(--primary-color);
+}
+
+.nice-button.secondary.disabled::ng-deep button {
+  background-color: var(--dark-secondary-color);
+}
+
+.nice-button.big::ng-deep button {
+  height: 48px;
+  width: 252px;
+}
+
+.nice-button.small::ng-deep button {
+  height: 35px;
+  width: 95px;
+}

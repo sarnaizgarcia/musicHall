@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ButtonColors, ButtonSizes } from '../components';
+
 @Component({
   selector: 'mh-artist',
   templateUrl: './artist.component.html',
@@ -7,11 +9,7 @@ import { Component } from '@angular/core';
 })
 
 export class ArtistComponent {
-  public searchValues = ['value 1', 'value 2', 'value 3', 'value 4', 'value 5'];
+  public color = ButtonColors.PRIMARY;
 
-  public inputValue: string = '';
-
-  public onValueSelected(event: string) {
-    this.inputValue = event;
-  }
+  public size = ButtonSizes.BIG;
 }
