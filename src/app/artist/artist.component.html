@@ -1,5 +1,5 @@
 <mh-modal-screen [show]="true">
   <mh-modal-window [modalType]="modalType">
-    <mh-artist-form (submitData)="logEvent($event)"></mh-artist-form>
+    <mh-artist-form (submitData)="logEvent($event)" [initalData]="artistData"></mh-artist-form>
   </mh-modal-window>
 </mh-modal-screen>
