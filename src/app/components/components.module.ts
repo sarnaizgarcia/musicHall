@@ -9,6 +9,7 @@ import { MenuListComponent } from './menu-list';
 import { MenuButtonComponent } from './menu-button';
 import { NavBarComponent } from './nav-bar';
 import { NiceInputComponent } from './nice-input';
+import { AutocompleteComponent } from './autocomplete';
 
 const components = [
   HomeLogoComponent,
@@ -16,12 +17,13 @@ const components = [
   MenuListComponent,
   MenuButtonComponent,
   NavBarComponent,
-  NiceInputComponent
+  NiceInputComponent,
+  AutocompleteComponent
 ];
 
 @NgModule({
   declarations: [ ...components ],
   imports: [ CommonModule, FormsModule, MatIconModule ],
-  exports: [ ...components ],
+  exports: [ ...components, FormsModule ],
 })
 export class ComponentsModule {}

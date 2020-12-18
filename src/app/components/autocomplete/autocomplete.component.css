@@ -1,0 +1,46 @@
+.autocomplete-filed {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-values {
+  list-style-type: none;
+  width: 100%;
+  background-color: var(--default-background-color);
+  font-size: var(--font-size-small);
+  color: var(--font-color-on-default-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 100;
+  box-shadow: var(--modal-sadow-box);
+  margin: 0px;
+  padding: 0px;
+}
+
+.value {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.value:hover,
+.value:focus {
+  outline: none;
+  background: var(--secondary-color);
+  color: var(--font-color-on-secondary);
+}
+
+@media (min-width: 800px) {
+  .value {
+    height: 33px;
+  }
+}

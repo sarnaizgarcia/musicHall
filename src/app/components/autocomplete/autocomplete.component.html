@@ -1,0 +1,12 @@
+<div class="autocomplete-field">
+  <ng-content></ng-content>
+  <ul class="list-values" *ngIf="areValues">
+    <li
+      class="value"
+      *ngFor="let value of valuesList"
+      tabindex="0"
+      (click)="onValueClick(value)"
+      (keyup)="onValueEnter($event, value)"
+      >{{value}}</li>
+  </ul>
+</div>

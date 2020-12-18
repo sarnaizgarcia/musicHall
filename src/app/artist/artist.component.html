@@ -1,5 +1,12 @@
-<mh-nice-input
- label="Input test"
->
-<input type="text" class="input-field" />
-</mh-nice-input>
+<mh-autocomplete
+  (valueSelected)="onValueSelected($event)"
+  [valuesList]="searchValues"
+  >
+  <mh-nice-input
+    label="Input test"
+    >
+    <input type="text" class="input-field" [(ngModel)]="inputValue"/>
+  </mh-nice-input>
+</mh-autocomplete>
+
+
