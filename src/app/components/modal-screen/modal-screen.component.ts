@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'mh-modal-screen',
@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./modal-screen.component.css']
 })
 
-export class ModalScreenComponent {}
+export class ModalScreenComponent {
+
+  @Input()
+  public show: boolean = false;
+}

@@ -14,6 +14,7 @@ import { NiceButtonComponent } from './nice-button';
 import { SearchArtistFormComponent } from './search-artist-form';
 import { SeparatorComponent } from './separator';
 import { ModalScreenComponent } from './modal-screen';
+import { LoadingComponent } from './loading';
 
 const components = [
   HomeLogoComponent,
@@ -26,7 +27,8 @@ const components = [
   NiceButtonComponent,
   SearchArtistFormComponent,
   SeparatorComponent,
-  ModalScreenComponent
+  ModalScreenComponent,
+  LoadingComponent
 ];
 
 @NgModule({

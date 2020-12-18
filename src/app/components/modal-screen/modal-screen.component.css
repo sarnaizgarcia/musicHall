@@ -1,6 +1,6 @@
 .modal-screen {
   width: 100%;
-  background-color: rgba(255, 171, 0, 0.3);
+  background-color: rgba(255, 171, 0, 0.7);
   position: absolute;
   z-index: 300;
   display: flex;
