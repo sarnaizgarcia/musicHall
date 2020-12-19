@@ -1,3 +1,16 @@
+<mh-modal-screen class="validation-message" [show]="validationMessage !== ''">
+  <mh-modal-window
+    [modalType]="validationType.modalType"
+    (closeWindow)="closeMessageValidation()"
+  >
+    <mh-modal-message
+      [message]="validationMessage"
+      [messageType]="validationType.messageType"
+      (answerMessage)="closeMessageValidation($event)"
+      [validateAnswer]="true"
+    ></mh-modal-message>
+  </mh-modal-window>
+</mh-modal-screen>
 <mh-modal-screen class="popup" [show]="!!popUp">
   <mh-modal-window
     [modalType]="ModalMessageType"

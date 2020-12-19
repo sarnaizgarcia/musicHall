@@ -40,9 +40,14 @@ export class ArtistComponent {
     photo: ''
   });
   public lastSearch: SearchArtistInfo | undefined;
+  public validationMessage: string = '';
+  public validationType = {
+    modalType: ModalTypes.WARNING,
+    messageType: MessageTypes.WARNING
+  }
 
   public get messageType(): MessageTypes {
-    return (this.popUp && this.popUp.type === ModalTypes.WANRING)
+    return (this.popUp && this.popUp.type === ModalTypes.WARNING)
       ? MessageTypes.WARNING
       : MessageTypes.SUCCESS
   }
@@ -110,7 +115,7 @@ export class ArtistComponent {
       })
       .catch((error) => {
         console.log(`Error: ${this.actionOnArtist} artist: `, error);
-        this.showPopup (`${artistData.artistName} was not possible to be added in the data base. Try 10 min later`, ModalTypes.WANRING);
+        this.showPopup (`${artistData.artistName} was not possible to be added in the data base. Try 10 min later`, ModalTypes.WARNING);
       });
     } else {
       this.artistRepo.updateArtist(
@@ -133,7 +138,7 @@ export class ArtistComponent {
       })
       .catch((error) => {
         console.log(`Error: ${this.actionOnArtist} artist: `, error);
-        this.showPopup(`The information about ${artistData.artistName} has not been able to be updated`, ModalTypes.WANRING);
+        this.showPopup(`The information about ${artistData.artistName} has not been able to be updated`, ModalTypes.WARNING);
       });
     }
   }
@@ -168,7 +173,7 @@ export class ArtistComponent {
       console.log(`Error searching artist with ${searchArtistInfo.artistName}: `, error);
       this.showPopup(
         `We are having network difficulties. Try again in 10 min`,
-        ModalTypes.WANRING
+        ModalTypes.WARNING
       );
     });
   }
@@ -184,18 +189,24 @@ export class ArtistComponent {
         this.launchUpdateArtist();
       break;
       case 'delete':
-        this.launchDeleteArtist();
+       this.launchDeleteArtist();
       break;
       default:
         this.showPopup(
           `Action ${action.action} not allowed`,
-          ModalTypes.WANRING
+          ModalTypes.WARNING
         );
     }
   }
 
   private launchDeleteArtist() {
-    if (this.artisIdSelected) {
+    this.validationMessage = 'Are sure about to remove this artist from your collection?';
+  }
+
+  public closeMessageValidation(event?: boolean) {
+    this.validationMessage = '';
+
+    if (event && this.artisIdSelected) {
       const selectedArtist = this.artistSearchList.find((artist: ArtistApp) => artist.id === this.artisIdSelected);
       this.loading = true;
       this.artistRepo.deleteArtist(this.artisIdSelected)
@@ -214,12 +225,11 @@ export class ArtistComponent {
         console.log(`Error removeing the ${this.artisIdSelected} artist`);
         this.showPopup(
           `We are having network difficulties. Try again in 10 min`,
-          ModalTypes.WANRING
+          ModalTypes.WARNING
         );
       });
     }
   }
-
 
   private launchUpdateArtist() {
     const selectedArtist = this.artistSearchList.find((artist: ArtistApp) => artist.id === this.artisIdSelected);
