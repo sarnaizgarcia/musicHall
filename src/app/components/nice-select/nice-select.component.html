@@ -1,0 +1,14 @@
+<div
+  class="nice-select"
+  [ngClass]="{'error': isError}"
+  >
+  <label
+    class="label-select"
+    >
+    {{label}}</label>
+  <ng-content></ng-content>
+  <div
+    class="error-msg"
+    *ngIf="isError"
+  >{{errorMsg}}</div>
+</div>

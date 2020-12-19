@@ -25,6 +25,7 @@ import { CardInfoComponent } from './card-info';
 import { PagGridComponent } from './pag-grid';
 import { FilterTagComponent } from './filter-tag';
 import { FiltersListComponent } from './filter-list';
+import { NiceSelectComponent } from './nice-select';
 
 const components = [
   HomeLogoComponent,
@@ -46,7 +47,8 @@ const components = [
   CardInfoComponent,
   PagGridComponent,
   FilterTagComponent,
-  FiltersListComponent
+  FiltersListComponent,
+  NiceSelectComponent
 ];
 
 @NgModule({
