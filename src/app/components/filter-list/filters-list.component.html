@@ -1,0 +1,7 @@
+<div class="filter-list">
+  <mh-filter-tag
+    *ngFor="let filter of filters"
+    [filterData]="filter"
+    (removeFilter)="filterSelected($event)"
+    ></mh-filter-tag>
+</div>

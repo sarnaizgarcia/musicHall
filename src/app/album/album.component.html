@@ -1,6 +1,5 @@
-<mh-filter-tag
-  [filterData]="filterData"
-  (removeFilter)="logEvent($event)"
+<mh-filters-list
+  [filters]="filterData"
+  (filterToRemove)="logEvent($event)"
   >
-
-</mh-filter-tag>
+</mh-filters-list>

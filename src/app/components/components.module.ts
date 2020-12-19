@@ -24,6 +24,7 @@ import { ModalMessage } from './modal-message';
 import { CardInfoComponent } from './card-info';
 import { PagGridComponent } from './pag-grid';
 import { FilterTagComponent } from './filter-tag';
+import { FiltersListComponent } from './filter-list';
 
 const components = [
   HomeLogoComponent,
@@ -44,7 +45,8 @@ const components = [
   ModalMessage,
   CardInfoComponent,
   PagGridComponent,
-  FilterTagComponent
+  FilterTagComponent,
+  FiltersListComponent
 ];
 
 @NgModule({

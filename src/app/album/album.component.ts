@@ -10,10 +10,20 @@ import { FilterData } from '../components';
 
 export class AlbumComponent {
 
-  public filterData: FilterData = {
-    field: 'Artist',
-    value: 'Leonard Cohen'
-  };
+  public filterData: FilterData[] = [
+    {
+      field: 'Artist',
+      value: 'Leonard Cohen'
+    },
+    {
+      field: 'Gendre',
+      value: 'Singer-songwriter'
+    },
+    {
+      field: 'Album',
+      value: 'Thanks for the dance'
+    }
+  ];
 
   public logEvent(event?: any) {
     console.log('NNN event fired: ', event);
