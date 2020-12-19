@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 import { HomeLogoComponent } from './home-logo';
 import { MenuOptionComponent } from './menu-option';
@@ -19,6 +20,7 @@ import { ModalWindowComponent } from './modal-window';
 import { UploadFileComponent, DragnDropDirective } from './upload-file';
 import { ArtistFormComponent } from './artist-form';
 import { ModalMessage } from './modal-message';
+import { CardInfoComponent } from './card-info';
 
 const components = [
   HomeLogoComponent,
@@ -36,12 +38,14 @@ const components = [
   ModalWindowComponent,
   UploadFileComponent,
   ArtistFormComponent,
-  ModalMessage
+  ModalMessage,
+  CardInfoComponent
 ];
 
 @NgModule({
   declarations: [ ...components, DragnDropDirective ],
-  imports: [ CommonModule, FormsModule, MatIconModule, ReactiveFormsModule ],
+  imports: [ CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, MatCardModule],
   exports: [ ...components, FormsModule ],
 })
+
 export class ComponentsModule {}

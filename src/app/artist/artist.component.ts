@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalTypes, ArtistDefaultData } from '../components';
+import { CardActionTypes, CardDataInput, CardDefinitionType } from '../components';
 
 @Component({
   selector: 'mh-artist',
@@ -10,13 +10,13 @@ import { ModalTypes, ArtistDefaultData } from '../components';
 
 export class ArtistComponent {
 
-  public modalType = ModalTypes.WANRING;
-
-  public artistData: ArtistDefaultData = {
-    artistName: 'Papa Noel',
-    birthDay: '01/12/1969',
-    deathDate: '01/12/2009',
-    photo: '../../assets/06-programming-coding-is-hell.png',
+  public cardInput: CardDataInput = {
+    type: CardDefinitionType.ALBUM,
+    title: 'Leonard Cohen',
+    subtitle: '(1934- 2016)',
+    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    body: '',
+    actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE ]
   };
 
   public logEvent(event?: any) {

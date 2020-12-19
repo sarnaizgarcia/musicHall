@@ -1,9 +1,4 @@
-<mh-modal-screen [show]="true">
-  <mh-modal-window [modalType]="modalType">
-    <mh-modal-message
-      message="The artist was added to the list"
-      messageType="warning"
-      (answerMessage)="logEvent($event)"
-      ></mh-modal-message>
-  </mh-modal-window>
-</mh-modal-screen>
+<mh-card-info
+  [dataInput]="cardInput"
+  (cardAction)="logEvent($event)"
+></mh-card-info>

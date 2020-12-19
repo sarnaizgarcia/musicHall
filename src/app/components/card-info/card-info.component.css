@@ -1,0 +1,54 @@
+.music-card {
+  width: 252px;
+  height: 342px;
+}
+
+.card-avatar.artist {
+  width: 20px;
+  height: 29px;
+  background-image: url("../../../assets/img/singer-card.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-avatar.album {
+  width: 37px;
+  height: 37px;
+  background-image: url("../../../assets/img/album-card.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+mat-card-content.mat-card-content.card-body {
+  margin-bottom: 0px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action.albums {
+  width: 34px;
+  height: 34px;
+  background-image: url("../../../assets/img/album-card-action.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.action.edit {
+  width: 26px;
+  height: 36px;
+  background-image: url("../../../assets/img/pencil-card-action.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.action.delete {
+  width: 32px;
+  height: 36px;
+  background-image: url("../../../assets/img/bin-card-action.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}

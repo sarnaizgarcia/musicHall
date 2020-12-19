@@ -1,0 +1,22 @@
+<mat-card class="music-card" *ngIf="dataInput">
+  <mat-card-header>
+    <div mat-card-avatar class="card-avatar" [ngClass]="[dataInput.type]"></div>
+    <mat-card-title>{{dataInput.title}}</mat-card-title>
+    <mat-card-subtitle>{{dataInput.subtitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="dataInput.photo" [alt]="altMainImage" />
+  <mat-card-content class="card-body">
+    {{dataInput.body}}
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <div
+      *ngFor="let action of dataInput.actions"
+      class="action"
+      [ngClass]="[action]"
+      tabindex="0"
+      (click)="clickOnAction(action)"
+      (keyup)="enterOnAction($event,action)"
+      >
+    </div>
+  </mat-card-actions>
+</mat-card>
