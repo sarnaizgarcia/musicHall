@@ -1,3 +1,12 @@
+<ng-container *ngIf="cardListEmpty; else elseTemplate">
+  <div class="empty-list">
+    <div class="empty-image"></div>
+    <div class="empty-message">
+      Empty list
+    </div>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
 <div
   class="card-grid"
   infiniteScroll
@@ -8,6 +17,6 @@
     *ngFor="let card of cardsList"
     [dataInput]="card"
     (cardAction)="onCardAction($event)"
-    >
-  </mh-card-info>
+    ></mh-card-info>
 </div>
+</ng-template>

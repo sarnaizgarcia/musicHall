@@ -4,7 +4,8 @@
       "host": "http://localhost:3000"
     },
     "fileBucket": {
-      "host": "http://localhost:3500"
+      "host": "http://localhost:3500",
+      "picturesHost": "http://localhost:8080"
     }
   }
 }

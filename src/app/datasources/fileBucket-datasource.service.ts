@@ -16,14 +16,14 @@ export class FileBucketDataSource {
     private httpClient: HttpClient
   ) {}
 
-  public sendFile(url: string, file: string, fileType: string): Observable<Object> {
+  public sendFile(url: string, file: File, fileType: string): Observable<Object> {
     const headers = {
       'Content-Type': fileType
     };
 
     return this.configApp.pipe(
       concatMap((config: ConfigApp) => {
-        const finalUrl = `${config.fileBucket}/${url}`;
+        const finalUrl = `${config.fileBucket.host}/${url}`;
 
         return this.httpClient.post(finalUrl, file, { headers });
       })

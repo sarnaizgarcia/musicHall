@@ -1,6 +1,7 @@
 .modal-window {
   width: 100%;
   box-shadow: var(--modal-shadow-box);
+  border-radius: var(--border-round);
 }
 
 .modal-window.neutral {

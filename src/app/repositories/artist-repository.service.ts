@@ -1,19 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 
 import { KenjoDataSource, VerbTypes,FileBucketDataSource } from '../datasources';
-import { ArtistApp, ArtistDataBase} from './repositories.entities';
-import { FileData } from '../components';
+import { ArtistApp, ArtistDataBase, ArtistBase} from './repositories.entities';
+import { ConfigApp } from '../utils';
+import { APP_CONFIG } from '../app.module';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NameService {
+
+export class ArtistRepository {
 
   constructor(
     private dataSource: KenjoDataSource,
-    private fileBucket: FileBucketDataSource
+    private fileBucket: FileBucketDataSource,
+    @Inject(APP_CONFIG) private configApp: Observable<ConfigApp>,
   ){}
 
   public searchArtist(artistName: string): Observable<ArtistApp[]> {
@@ -27,30 +30,69 @@ export class NameService {
             id: artistDb._id,
             name: artistDb.name,
             photoUrl: artistDb.photoUrl,
-            birthDate: artistDb.birthDate,
-            deathDate: artistDb.deathDate
+            birthdate: `${new Date(artistDb.birthdate).getDate()}/${new Date(artistDb.birthdate).getMonth() + 1}/${new Date(artistDb.birthdate).getFullYear()}`,
+            deathDate: (artistDb.deathDate) ? `${new Date(artistDb.deathDate).getDate()}/${new Date(artistDb.deathDate).getMonth() + 1}/${new Date(artistDb.deathDate).getFullYear()}` : ''
           }));
+      }),
+      concatMap((artistList: ArtistApp[]) => {
+        return this.configApp.pipe(
+          map((configApp: ConfigApp) => ({ artistList, configApp }))
+        )
+      }),
+      map(({artistList, configApp}) => {
+        return artistList.map((artist: ArtistApp) => ({
+          ...artist,
+          photoUrl: `${configApp.fileBucket.picturesHost}/${artist.photoUrl}`
+        }))
       })
     );
   }
 
-  public createNewArtist(artistData: ArtistApp, fileData: FileData): Observable<any> {
-    return this.dataSource.request('artist', VerbTypes.POST, artistData).pipe(
+  public createNewArtist(artistData: ArtistBase, fileData: File): Observable<any> {
+    const fileExtension = fileData.name.split('.')[1]
+    const filePath = `artist/${artistData.name}_${new Date().getTime()}.${fileExtension}`.replace(' ','-');
+    const fileType = fileData.type;
+    const birthDayArray = artistData.birthdate.split('/').map((value) => Number(value));
+    const deathDateArray = artistData.deathDate.split('/').map((value) => Number(value));
+
+    return this.dataSource.request(
+      'artist',
+      VerbTypes.POST,
+      {
+        ...artistData,
+        birthdate: new Date(birthDayArray[2],(birthDayArray[1] - 1),birthDayArray[0]),
+        deathDate: new Date(deathDateArray[2], (deathDateArray[1] - 1), deathDateArray[0]),
+        photoUrl: filePath
+      }
+      ).pipe(
       concatMap(() => {
-        const fileExtension = fileData.fileName.split('.')[1];
-        const filePath = `artist/${artistData.name}_${new Date().getTime()}.${fileExtension}`;
-        const fileType = `image/${fileExtension}`;
-
-        return this.fileBucket.sendFile(filePath, fileData.content, fileType);
+        return this.fileBucket.sendFile(`upload/${filePath}`, fileData, fileType);
       })
     );
   }
 
-  public updateArtist (artistData: ArtistApp): Observable<any> {
+  public updateArtist (artistData: ArtistBase, fileData: File): Observable<any> {
     if (!artistData.id) {
       throw new Error('Id is required to update the artist data');
     }
-    return this.dataSource.request(`artist/${artistData.id}`, VerbTypes.PUT, artistData);
+    const fileExtension = fileData.name.split('.')[1]
+    const filePath = `artist/${artistData.name}_${new Date().getTime()}.${fileExtension}`;
+    const fileType = fileData.type;
+    const birthDayArray = artistData.birthdate.split('/').map((value) => Number(value));
+    const deathDateArray = artistData.deathDate.split('/').map((value) => Number(value));
+
+    return this.dataSource.request(
+      `artist/${artistData.id}`,
+      VerbTypes.PUT,
+      {
+        ...artistData,
+        birthdate: new Date(birthDayArray[2],birthDayArray[1],birthDayArray[0]),
+        deathDate: new Date(deathDateArray[2], deathDateArray[1], deathDateArray[0]),
+        photoUrl: filePath
+      }
+      ).pipe(
+      concatMap(() => this.fileBucket.sendFile(`upload/${filePath}`, fileData, fileType))
+    );
   }
 
   public deleteArtist(id: string): Observable<any> {

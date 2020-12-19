@@ -16,7 +16,7 @@
     </mh-nice-input>
     <div class="buttons">
       <mh-nice-button class="button">
-        <button type="button">Close</button>
+        <button type="button" (click)="clickOnCloseButton()">Close</button>
       </mh-nice-button>
       <mh-nice-button class="button" [color]="saveButtonColor" [disabled]="!artistForm.valid || !fileData">
         <button type="submit" [disabled]="!artistForm.valid || !fileData">Save</button>

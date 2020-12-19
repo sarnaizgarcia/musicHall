@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { ButtonColors } from '../nice-button';
-import { FileData } from '../upload-file';
 import { ArtistData, ArtistDefaultData } from './artist-form.entities';
 
 @Component({
@@ -24,13 +23,16 @@ export class ArtistFormComponent {
   @Output()
   public submitData: EventEmitter<ArtistData> = new EventEmitter<ArtistData>();
 
+  @Output()
+  public closeForm: EventEmitter<void> = new EventEmitter<void>();
+
   public saveButtonColor = ButtonColors.SECONDARY;
   public artistForm = this.formBuilder.group({
     artistName: [this.initalData.artistName, [Validators.required]],
     birthDay: [this.initalData.birthDay, [Validators.required, Validators.pattern(/[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]/)]],
     deathDate: [this.initalData.deathDate, [Validators.pattern(/[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]/)]]
   });
-  public fileData: FileData | undefined;
+  public fileData: File | undefined;
 
   get validationsError () {
     const artistField = this.artistForm.get('artistName');
@@ -62,7 +64,7 @@ export class ArtistFormComponent {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  public setImageData (event: FileData) {
+  public setImageData (event: File) {
     this.fileData = event;
   }
 
@@ -72,5 +74,9 @@ export class ArtistFormComponent {
       ...this.artistForm.value,
       photo: this.fileData
     });
+  }
+
+  public clickOnCloseButton () {
+    this.closeForm.emit();
   }
 }

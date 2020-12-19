@@ -20,6 +20,13 @@
   background-repeat: no-repeat;
 }
 
+.card-image {
+  width: 100%;
+  height: 210px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
 mat-card-content.mat-card-content.card-body {
   margin-bottom: 0px;
 }

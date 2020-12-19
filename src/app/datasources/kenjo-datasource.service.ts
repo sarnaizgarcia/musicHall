@@ -27,11 +27,15 @@ export class KenjoDataSource {
     }
     return this.appConfig.pipe(
       concatMap((config: ConfigApp) => {
-        const finalUrl =`${config.musicHallBack}/${url}`;
+        const finalUrl =`${config.musicHallBack.host}/${url}`;
+        let result = null;
 
-        return (verb === VerbTypes.POST || verb === VerbTypes.PUT)
-          ? this.httpClient[verb](finalUrl, body, { headers })
-          : this.httpClient[verb](finalUrl);
+        if (verb === VerbTypes.POST || verb === VerbTypes.PUT) {
+          result = this.httpClient[verb](finalUrl, body, { headers });
+        } else {
+          result = this.httpClient[verb](finalUrl);
+        }
+        return result;
       })
     );
   }

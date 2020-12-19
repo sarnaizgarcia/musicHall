@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ButtonColors, ButtonSizes } from '../nice-button';
+import { MessageTypes } from './modal-message.entities';
 
 @Component({
   selector: 'mh-modal-message',
@@ -16,7 +17,7 @@ export class ModalMessage {
   public validateAnswer: boolean = false;
 
   @Input()
-  public messageType: 'success' | 'warning' = 'success';
+  public messageType: MessageTypes = MessageTypes.SUCCESS;
 
   @Output()
   public answerMessage: EventEmitter<boolean> = new EventEmitter<boolean>();

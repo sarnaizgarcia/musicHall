@@ -1,5 +1,43 @@
-<mh-pag-grid
-  [cardsList]="cardInput"
-  (pagEvent)="logEvent($event)"
-  (cardAction)="logEvent($event)"
-></mh-pag-grid>
+<mh-modal-screen class="popup" [show]="!!popUp">
+  <mh-modal-window
+    [modalType]="ModalMessageType"
+    (closeWindow)="closeMessage()"
+  >
+    <mh-modal-message
+      [message]="ModalMessageText"
+      [messageType]="messageType"
+      (answerMessage)="closeMessage()"
+    ></mh-modal-message>
+  </mh-modal-window>
+</mh-modal-screen>
+<mh-modal-screen class="loading" [show]="loading">
+  <mh-loading></mh-loading>
+</mh-modal-screen>
+<mh-modal-screen class="artist-form" [show]="showArtistForm">
+  <mh-modal-window (closeWindow)="closeArtistForm()">
+    <mh-artist-form
+    (submitData)="setArtistData($event)"
+    (closeForm)="closeArtistForm()"
+    ></mh-artist-form>
+  </mh-modal-window>
+</mh-modal-screen>
+<mh-nav-bar
+  navText="Artists"
+  [showBack]="true"
+  [options]="menuOptions"
+  (goingBack)="goBack()"
+  (optionSelected)="navigate($event)"
+  class="nav-bar-artist"
+></mh-nav-bar>
+<div class="search-form">
+  <mh-search-artist-form (formSubmit)="searchArtist($event)"></mh-search-artist-form>
+</div>
+<div class="artist-separator">
+  <mh-separator (newElement)="openArtistForm('create')"></mh-separator>
+</div>
+<div class="artist-grid">
+  <mh-pag-grid
+    [cardsList]="artistSearchList"
+    [total]="totalList"
+  ></mh-pag-grid>
+</div>

@@ -2,16 +2,18 @@ export interface ArtistDataBase {
   _id: string,
   name: string,
   photoUrl: string,
-  birthDate: string,
-  deathDate: string,
+  birthdate: Date,
+  deathDate: Date,
   _createdAt: string,
   _updatedAt: string,
 }
 
-export interface ArtistApp {
+export interface ArtistBase {
   id?: string,
   name: string,
-  photoUrl: string,
-  birthDate: string,
+  birthdate: string,
   deathDate: string,
+}
+export interface ArtistApp extends ArtistBase{
+  photoUrl: string;
 }

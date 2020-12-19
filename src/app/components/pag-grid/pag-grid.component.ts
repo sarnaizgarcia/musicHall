@@ -25,6 +25,10 @@ export class PagGridComponent {
   @Output()
   public cardAction: EventEmitter<CardAction> = new EventEmitter<CardAction>();
 
+  get cardListEmpty () {
+    return this.cardsList.length === 0;
+  }
+
   public onScroll() {
     const leng = this.cardsList.length;
     if (leng < this.total) {

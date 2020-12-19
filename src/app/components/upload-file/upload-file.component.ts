@@ -1,14 +1,14 @@
-import { Component,
-  ElementRef,
-  Input,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
+import {
+  Component,
   Output,
-  ViewChild
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  Input
 } from '@angular/core';
 
-import { FileData } from './upload-file.entities';
 
 @Component({
   selector: 'mh-upload-file',
@@ -19,32 +19,24 @@ import { FileData } from './upload-file.entities';
 export class UploadFileComponent implements OnInit, OnDestroy {
 
   @Output()
-  public imageSelected: EventEmitter<FileData> = new EventEmitter<FileData>();
+  public imageSelected: EventEmitter<File> = new EventEmitter<File>();
 
   @ViewChild('fileDropRef')
   public inputFile: ElementRef | undefined;
 
   @Input()
   public imageContent: string | null = null;
-  
+
   public reader = new FileReader();
+
   private fileSelected: File | undefined;
-  private context = this.getImageContent.bind(this);
 
   ngOnInit() {
-    this.reader.addEventListener('loadend', this.context);
-  }
-
-  ngOnDestroy() {
-    this.reader.removeEventListener('loadend', this.context);
+    this.reader.addEventListener('loadend', this.getImageContent.bind(this));
   }
 
   private getImageContent (fileEvent: any) {
     this.imageContent = fileEvent.target.result;
-    this.imageSelected.emit({
-      fileName: (this.fileSelected) ? this.fileSelected.name : '',
-      content: fileEvent.target.result
-    })
   }
 
   public onFileDropped(event: FileList) {
@@ -68,6 +60,11 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     if (event.target.files && event.target.files[0]) {
       this.fileSelected = event.target.files[0];
       this.reader.readAsDataURL(event.target.files[0]);
+      this.imageSelected.emit(event.target.files[0])
     }
+  }
+
+  ngOnDestroy() {
+    this.reader.removeEventListener('loadend', this.getImageContent);
   }
 }

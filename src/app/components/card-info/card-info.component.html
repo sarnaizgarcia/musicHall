@@ -4,7 +4,9 @@
     <mat-card-title>{{dataInput.title}}</mat-card-title>
     <mat-card-subtitle>{{dataInput.subtitle}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image [src]="dataInput.photo" [alt]="altMainImage" />
+  <div class="card-image">
+    <img mat-card-image [src]="dataInput.photo" [alt]="altMainImage" />
+  </div>
   <mat-card-content class="card-body">
     {{dataInput.body}}
   </mat-card-content>

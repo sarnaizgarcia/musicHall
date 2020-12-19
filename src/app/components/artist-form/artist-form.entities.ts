@@ -1,10 +1,8 @@
-import { FileData } from '../upload-file';
-
 export interface ArtistData {
   artistName: string;
   birthDay: string;
   deathDate: string;
-  photo: FileData;
+  photo: File;
 }
 
 export interface ArtistDefaultData {
