@@ -7,7 +7,6 @@ import { CardActionTypes, CardDataInput, CardDefinitionType } from '../component
   templateUrl: './artist.component.html',
   styleUrls: ['./artist.component.css']
 })
-
 export class ArtistComponent {
 
   public cardInput: CardDataInput[] = [{
@@ -15,7 +14,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -23,7 +22,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -31,7 +30,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -39,7 +38,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -47,7 +46,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -55,7 +54,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -63,7 +62,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -71,7 +70,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -79,7 +78,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -87,7 +86,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -95,7 +94,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -103,7 +102,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -111,7 +110,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -119,7 +118,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -127,7 +126,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -135,7 +134,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -143,7 +142,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }, {
@@ -151,7 +150,7 @@ export class ArtistComponent {
     type: CardDefinitionType.ALBUM,
     title: 'Leonard Cohen',
     subtitle: '(1934- 2016)',
-    photo: '../../assets/img/06-programming-coding-is-hell.png',
+    photo: '../../assets/06-programming-coding-is-hell.png',
     body: '',
     actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE]
   }]

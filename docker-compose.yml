@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  middleware:
+    image: 'gonzalokenjo/kenjo-challenge'
+    ports:
+      - '3000:3000'
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '27017:27017'
+  filesbucket:
+    build: .
+    volumes:
+      - ./images:/usr/share/nginx/html
+    ports:
+      - 8080:80
+      - 3500:3500
+    environment:
+      - FILE_UPLOADER_PORT=3500
+      - FILE_UPLOADER_BASE_PATH=/usr/share/nginx/html

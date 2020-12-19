@@ -47,7 +47,8 @@ const components = [
 
 @NgModule({
   declarations: [ ...components, DragnDropDirective ],
-  imports: [ CommonModule,
+  imports: [
+    CommonModule,
     FormsModule,
     MatIconModule,
     ReactiveFormsModule,
