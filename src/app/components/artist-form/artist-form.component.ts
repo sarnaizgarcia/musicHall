@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
 
 import { ButtonColors } from '../nice-button';
 import { ArtistData, ArtistDefaultData } from './artist-form.entities';
@@ -9,16 +10,10 @@ import { ArtistData, ArtistDefaultData } from './artist-form.entities';
   templateUrl: './artist-form.component.html',
   styleUrls: ['./artist-form.component.css']
 })
-
-export class ArtistFormComponent {
+export class ArtistFormComponent implements OnInit, OnDestroy {
 
   @Input()
-  public initalData: ArtistDefaultData = {
-    artistName: '',
-    birthDay: '',
-    deathDate: '',
-    photo: ''
-  }
+  public initalData: Observable<ArtistDefaultData> | undefined;
 
   @Output()
   public submitData: EventEmitter<ArtistData> = new EventEmitter<ArtistData>();
@@ -28,11 +23,13 @@ export class ArtistFormComponent {
 
   public saveButtonColor = ButtonColors.SECONDARY;
   public artistForm = this.formBuilder.group({
-    artistName: [this.initalData.artistName, [Validators.required]],
-    birthDay: [this.initalData.birthDay, [Validators.required, Validators.pattern(/[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]/)]],
-    deathDate: [this.initalData.deathDate, [Validators.pattern(/[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]/)]]
+    artistName: [ '', [Validators.required]],
+    birthDay: ['', [Validators.required, Validators.pattern(/[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]/)]],
+    deathDate: ['', [Validators.pattern(/[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9][0-9][0-9]/)]]
   });
-  public fileData: File | undefined;
+  public fileData: File | null = null;
+
+  public photo: string | null = null;
 
   get validationsError () {
     const artistField = this.artistForm.get('artistName');
@@ -62,7 +59,30 @@ export class ArtistFormComponent {
     }
   }
 
+  private subscriptions: Subscription[] = [];
+
   constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    if (this.initalData) {
+      this.subscriptions.push(
+        this.initalData.subscribe((value: ArtistDefaultData) => {
+          this.artistForm.setValue({
+            artistName: value.artistName,
+            birthDay: value.birthDay,
+            deathDate: value.deathDate
+          });
+          this.photo = value.photo;
+        })
+      );
+    }
+  }
+
+  ngOnDestroy() {
+    for(const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
+  }
 
   public setImageData (event: File) {
     this.fileData = event;
@@ -74,6 +94,7 @@ export class ArtistFormComponent {
       ...this.artistForm.value,
       photo: this.fileData
     });
+    this.fileData = null;
   }
 
   public clickOnCloseButton () {

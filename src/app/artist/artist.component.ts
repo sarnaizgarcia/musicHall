@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {
@@ -12,6 +13,8 @@ import {
   CardDataInput,
   CardDefinitionType,
   CardActionTypes,
+  CardAction,
+  ArtistDefaultData,
 } from '../components';
 import { ArtistApp, ArtistRepository } from '../repositories';
 
@@ -27,8 +30,16 @@ export class ArtistComponent {
   public showArtistForm = false;
   public loading = false;
   public popUp: { message: string; type: ModalTypes } | null = null;
-  public artistSearchList: CardDataInput[] = [];
+  public artistSearchList: ArtistApp[] = [];
+  public cardList: CardDataInput[] = [];
   public totalList = 0;
+  public artistSelectedInfo: BehaviorSubject<ArtistDefaultData> = new BehaviorSubject({
+    artistName: '',
+    birthDay: '',
+    deathDate: '',
+    photo: ''
+  });
+  public lastSearch: SearchArtistInfo | undefined;
 
   public get messageType(): MessageTypes {
     return (this.popUp && this.popUp.type === ModalTypes.WANRING)
@@ -49,6 +60,7 @@ export class ArtistComponent {
   }
 
   private actionOnArtist: 'create' | 'update' = 'create';
+  private artisIdSelected: string | null = null;
 
   constructor(
     private location: Location,
@@ -103,16 +115,21 @@ export class ArtistComponent {
     } else {
       this.artistRepo.updateArtist(
         {
+          id: this.artisIdSelected || '',
           name: artistData.artistName,
           birthdate: artistData.birthDay,
           deathDate: artistData.deathDate
         },
-        artistData.photo
+        artistData.photo || this.artistSearchList.find((artist: ArtistApp) => artist.id === this.artisIdSelected)?.photoUrl
       )
       .toPromise()
       .then(() => {
         console.log('Success')
+        this.artisIdSelected = null;
         this.showPopup(`The data of ${artistData.artistName} has been updated`, ModalTypes.SUCCESS);
+        if (this.lastSearch) {
+          this.searchArtist(this.lastSearch);
+        }
       })
       .catch((error) => {
         console.log(`Error: ${this.actionOnArtist} artist: `, error);
@@ -129,6 +146,7 @@ export class ArtistComponent {
     this.loading = true;
     this.artistRepo.searchArtist(searchArtistInfo.artistName).pipe(
       map((value: ArtistApp[]) => {
+        this.artistSearchList = value.filter((card) => card.id !== '');
         return value.map((artist: ArtistApp) => ({
           id: artist.id || '',
           type: CardDefinitionType.ARTIST,
@@ -142,8 +160,9 @@ export class ArtistComponent {
     ).toPromise()
     .then((cardList: CardDataInput[]) => {
       this.loading = false;
-      this.artistSearchList = cardList.filter((card) => card.id !== '');
-      this.totalList = this.artistSearchList.length;
+      this.cardList = cardList;
+      this.totalList = this.cardList.length;
+      this.lastSearch = searchArtistInfo;
     })
     .catch((error: any) => {
       console.log(`Error searching artist with ${searchArtistInfo.artistName}: `, error);
@@ -152,6 +171,40 @@ export class ArtistComponent {
         ModalTypes.WANRING
       );
     });
+  }
+
+  public resolveCardAction (action: CardAction) {
+    this.artisIdSelected = action.id;
+
+    switch(action.action) {
+      case 'albums':
+        console.log('Navigate to artist albums: ', action);
+      break;
+      case 'edit':
+        this.launchUpdateArtist();
+      break;
+      case 'delete':
+        console.log('Remove artist: ', action);
+      break;
+      default:
+        this.showPopup(
+          `Action ${action.action} not allowed`,
+          ModalTypes.WANRING
+        );
+    }
+  }
+
+  private launchUpdateArtist() {
+    const selectedArtist = this.artistSearchList.find((artist: ArtistApp) => artist.id === this.artisIdSelected);
+    if (selectedArtist) {
+      this.openArtistForm('update');
+      this.artistSelectedInfo.next({
+        artistName: selectedArtist.name,
+        birthDay: selectedArtist.birthdate,
+        deathDate: selectedArtist.deathDate,
+        photo: selectedArtist.photoUrl
+      });
+    }
   }
 
   private showPopup (message: string, type: ModalTypes) {

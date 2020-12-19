@@ -18,6 +18,7 @@
     <mh-artist-form
     (submitData)="setArtistData($event)"
     (closeForm)="closeArtistForm()"
+    [initalData]="artistSelectedInfo"
     ></mh-artist-form>
   </mh-modal-window>
 </mh-modal-screen>
@@ -37,7 +38,8 @@
 </div>
 <div class="artist-grid">
   <mh-pag-grid
-    [cardsList]="artistSearchList"
+    [cardsList]="cardList"
     [total]="totalList"
+    (cardAction)="resolveCardAction($event)"
   ></mh-pag-grid>
 </div>

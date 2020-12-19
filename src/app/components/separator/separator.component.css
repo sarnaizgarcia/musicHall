@@ -14,4 +14,5 @@
   width: 10%;
   font-size: var(--font-size-big);
   color: var(--secondary-color);
+  cursor: pointer;
 }

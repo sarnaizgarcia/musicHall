@@ -30,8 +30,8 @@ export class ArtistRepository {
             id: artistDb._id,
             name: artistDb.name,
             photoUrl: artistDb.photoUrl,
-            birthdate: `${new Date(artistDb.birthdate).getDate()}/${new Date(artistDb.birthdate).getMonth() + 1}/${new Date(artistDb.birthdate).getFullYear()}`,
-            deathDate: (artistDb.deathDate) ? `${new Date(artistDb.deathDate).getDate()}/${new Date(artistDb.deathDate).getMonth() + 1}/${new Date(artistDb.deathDate).getFullYear()}` : ''
+            birthdate: this.formatDate(new Date(artistDb.birthdate)),
+            deathDate: (artistDb.deathDate) ? this.formatDate(new Date(artistDb.deathDate)) : ''
           }));
       }),
       concatMap((artistList: ArtistApp[]) => {
@@ -71,31 +71,54 @@ export class ArtistRepository {
     );
   }
 
-  public updateArtist (artistData: ArtistBase, fileData: File): Observable<any> {
+  public updateArtist (artistData: ArtistBase, fileData: File | string): Observable<any> {
     if (!artistData.id) {
       throw new Error('Id is required to update the artist data');
     }
-    const fileExtension = fileData.name.split('.')[1]
-    const filePath = `artist/${artistData.name}_${new Date().getTime()}.${fileExtension}`;
-    const fileType = fileData.type;
+
     const birthDayArray = artistData.birthdate.split('/').map((value) => Number(value));
     const deathDateArray = artistData.deathDate.split('/').map((value) => Number(value));
 
-    return this.dataSource.request(
+    let fileExtension = '';
+    let filePath = '';
+    let fileType = '';
+
+    if (typeof fileData === 'string') {
+      filePath = new URL(fileData).pathname;
+    } else {
+      fileExtension = fileData.name.split('.')[1]
+      filePath = `artist/${artistData.name}_${new Date().getTime()}.${fileExtension}`;
+      fileType = fileData.type;
+    }
+
+    let result = this.dataSource.request(
       `artist/${artistData.id}`,
       VerbTypes.PUT,
       {
         ...artistData,
-        birthdate: new Date(birthDayArray[2],birthDayArray[1],birthDayArray[0]),
-        deathDate: new Date(deathDateArray[2], deathDateArray[1], deathDateArray[0]),
+        birthdate: new Date(birthDayArray[2],(birthDayArray[1] - 1),birthDayArray[0]),
+        deathDate: new Date(deathDateArray[2], (deathDateArray[1] - 1), deathDateArray[0]),
         photoUrl: filePath
       }
-      ).pipe(
-      concatMap(() => this.fileBucket.sendFile(`upload/${filePath}`, fileData, fileType))
     );
+
+    if (typeof fileData !== 'string') {
+      result = result.pipe(
+        concatMap(() => this.fileBucket.sendFile(`upload/${filePath}`, fileData, fileType))
+      );
+    }
+    return result;
   }
 
   public deleteArtist(id: string): Observable<any> {
     return this.dataSource.request(`/artist/${id}`, VerbTypes.DELETE);
+  }
+
+  private formatDate(date: Date) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return `${(day < 10) ? `0${day}`: day}/${(month < 10) ? `0${month}`: month}/${year}`;
   }
 }
