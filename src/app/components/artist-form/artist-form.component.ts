@@ -90,11 +90,17 @@ export class ArtistFormComponent implements OnInit, OnDestroy {
 
   public onSubmitArtistData (event: Event) {
     event.preventDefault();
-    this.submitData.emit({
-      ...this.artistForm.value,
-      photo: this.fileData
-    });
+    const artistInfo = this.artistForm.value;
+    const fileData = this.fileData;
+
     this.fileData = null;
+    this.photo = null;
+    this.artistForm.reset();
+
+    this.submitData.emit({
+      ...artistInfo,
+      photo: fileData
+    });
   }
 
   public clickOnCloseButton () {
