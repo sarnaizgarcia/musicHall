@@ -184,7 +184,7 @@ export class ArtistComponent {
         this.launchUpdateArtist();
       break;
       case 'delete':
-        console.log('Remove artist: ', action);
+        this.launchDeleteArtist();
       break;
       default:
         this.showPopup(
@@ -193,6 +193,33 @@ export class ArtistComponent {
         );
     }
   }
+
+  private launchDeleteArtist() {
+    if (this.artisIdSelected) {
+      const selectedArtist = this.artistSearchList.find((artist: ArtistApp) => artist.id === this.artisIdSelected);
+      this.loading = true;
+      this.artistRepo.deleteArtist(this.artisIdSelected)
+      .toPromise()
+      .then(() => {
+        this.showPopup(
+          `${selectedArtist?.name} has been removed from your list`,
+          ModalTypes.SUCCESS
+        )
+
+        if (this.lastSearch) {
+          this.searchArtist(this.lastSearch);
+        }
+      })
+      .catch((error) => {
+        console.log(`Error removeing the ${this.artisIdSelected} artist`);
+        this.showPopup(
+          `We are having network difficulties. Try again in 10 min`,
+          ModalTypes.WANRING
+        );
+      });
+    }
+  }
+
 
   private launchUpdateArtist() {
     const selectedArtist = this.artistSearchList.find((artist: ArtistApp) => artist.id === this.artisIdSelected);
