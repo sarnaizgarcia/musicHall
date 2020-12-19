@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { HomeLogoComponent } from './home-logo';
 import { MenuOptionComponent } from './menu-option';
@@ -21,6 +22,7 @@ import { UploadFileComponent, DragnDropDirective } from './upload-file';
 import { ArtistFormComponent } from './artist-form';
 import { ModalMessage } from './modal-message';
 import { CardInfoComponent } from './card-info';
+import { PagGridComponent } from './pag-grid';
 
 const components = [
   HomeLogoComponent,
@@ -39,12 +41,19 @@ const components = [
   UploadFileComponent,
   ArtistFormComponent,
   ModalMessage,
-  CardInfoComponent
+  CardInfoComponent,
+  PagGridComponent
 ];
 
 @NgModule({
   declarations: [ ...components, DragnDropDirective ],
-  imports: [ CommonModule, FormsModule, MatIconModule, ReactiveFormsModule, MatCardModule],
+  imports: [ CommonModule,
+    FormsModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    InfiniteScrollModule
+  ],
   exports: [ ...components, FormsModule ],
 })
 

@@ -5,4 +5,5 @@ export { SearchArtistInfo } from './search-artist-form';
 export { ModalTypes } from './modal-window';
 export { FileData } from './upload-file';
 export { ArtistData, ArtistDefaultData } from './artist-form';
-export { CardActionTypes, CardDefinitionType, CardDataInput } from './card-info';
+export { CardActionTypes, CardDefinitionType, CardDataInput,  } from './card-info';
+export { PaginationEvent } from './pag-grid';

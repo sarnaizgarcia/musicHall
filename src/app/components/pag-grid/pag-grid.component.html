@@ -1,0 +1,13 @@
+<div
+  class="card-grid"
+  infiniteScroll
+  [infiniteScrollDistance]="3"
+  (scrolled)="onScroll()"
+  >
+  <mh-card-info
+    *ngFor="let card of cardsList"
+    [dataInput]="card"
+    (cardAction)="onCardAction($event)"
+    >
+  </mh-card-info>
+</div>

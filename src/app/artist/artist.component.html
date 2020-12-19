@@ -1,4 +1,5 @@
-<mh-card-info
-  [dataInput]="cardInput"
+<mh-pag-grid
+  [cardsList]="cardInput"
+  (pagEvent)="logEvent($event)"
   (cardAction)="logEvent($event)"
-></mh-card-info>
+></mh-pag-grid>

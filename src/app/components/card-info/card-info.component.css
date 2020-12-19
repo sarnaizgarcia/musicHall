@@ -1,6 +1,7 @@
 .music-card {
   width: 252px;
   height: 342px;
+  margin: 25px;
 }
 
 .card-avatar.artist {

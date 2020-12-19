@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { CardDataInput } from './card-info.entities';
+import { CardDataInput, CardAction } from './card-info.entities';
 
 @Component({
   selector: 'mh-card-info',
@@ -13,7 +13,7 @@ export class CardInfoComponent {
   public dataInput: CardDataInput | undefined;
 
   @Output()
-  public cardAction: EventEmitter<string> = new EventEmitter<string>();
+  public cardAction: EventEmitter<CardAction> = new EventEmitter<CardAction>();
 
   get altMainImage() {
     return `${this.dataInput?.title} image`
@@ -21,12 +21,12 @@ export class CardInfoComponent {
 
 
   public clickOnAction(action: string) {
-    this.cardAction.emit(action);
+    this.cardAction.emit({ id: this.dataInput?.id || '', action});
   }
 
   public enterOnAction(event: KeyboardEvent, action: string) {
     if (event.key === 'Enter') {
-      this.cardAction.emit(action);
+      this.cardAction.emit({ id: this.dataInput?.id || '', action });
     }
   }
 }
