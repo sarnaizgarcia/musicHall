@@ -7,3 +7,4 @@ export { ArtistData, ArtistDefaultData } from './artist-form';
 export { CardActionTypes, CardDefinitionType, CardDataInput, CardAction } from './card-info';
 export { PaginationEvent } from './pag-grid';
 export { MessageTypes } from './modal-message';
+export { FilterData } from './filter-tag';

@@ -1,0 +1,19 @@
+<div
+  class="filter-tag"
+  tabindex="0"
+  (click)="clickOnFilterTag()"
+  (keyup)="enterOnFilterTag($event)"
+  >
+  <div class="text">
+    {{filterData.field}}:{{filterData.value}}
+  </div>
+  <div class="remove-button">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="remove filter"
+      class="remove-icon"
+     >
+      highlight_off
+    </mat-icon>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.filter-tag {
+  width: 129px;
+  height: 36px;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-round);
+}
+
+.text {
+  color: var(--font-color-on-secondary);
+  font-size: var(--font-size-little);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0px 5px;
+}
+
+.remove-button {
+  margin: 0px 5px;
+}
+
+.remove-icon {
+  color: var(--font-color-on-secondary);
+}

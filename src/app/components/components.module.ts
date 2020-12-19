@@ -23,6 +23,7 @@ import { ArtistFormComponent } from './artist-form';
 import { ModalMessage } from './modal-message';
 import { CardInfoComponent } from './card-info';
 import { PagGridComponent } from './pag-grid';
+import { FilterTagComponent } from './filter-tag';
 
 const components = [
   HomeLogoComponent,
@@ -42,7 +43,8 @@ const components = [
   ArtistFormComponent,
   ModalMessage,
   CardInfoComponent,
-  PagGridComponent
+  PagGridComponent,
+  FilterTagComponent
 ];
 
 @NgModule({
