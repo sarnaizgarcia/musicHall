@@ -1,0 +1,63 @@
+<form
+  class="search-form-mobile"
+  (submit)="createFilter($event)"
+  >
+  <div class="filter text">
+    <mh-autocomplete
+      [valuesList]="artistNamesList"
+      (valueSelected)="artistSelected($event)"
+      *ngIf="filterSelected === 'artist'"
+      >
+      <mh-nice-input label="Search album by artist name">
+          <input type="text"
+            name="artist-filter"
+            [(ngModel)]="artistFilter"
+            (input)="partialFilter($event)"
+            (blur)="onAutocompleteBlur()"
+          />
+      </mh-nice-input>
+    </mh-autocomplete>
+    <mh-nice-input
+      label="Search album by title"
+      *ngIf="filterSelected === 'album'"
+      >
+      <input
+        type="text"
+        name="album-filter"
+        [(ngModel)]="albumFilter"
+        />
+    </mh-nice-input>
+    <mh-nice-input
+      label="Search album by gendre"
+      *ngIf="filterSelected === 'gendre'"
+      >
+      <input
+        type="text"
+        name="gendre-filter"
+        [(ngModel)]="gendreFilter"
+        />
+    </mh-nice-input>
+  </div>
+  <div class="select filter">
+    <div class="select-space">
+      <mh-nice-select label="Select filter type">
+        <select
+          [(ngModel)]="filterSelected"
+          [ngModelOptions]="{standalone: true}"
+          >
+          <option value="artist">Artist name</option>
+          <option value="album">Album title</option>
+          <option value="gendre">Music gendre</option>
+        </select>
+      </mh-nice-select>
+    </div>
+    <div class="button-space">
+      <mh-nice-button
+        [color]="buttonColor"
+        [size]="buttonSize"
+        >
+        <button type="submit">Search</button>
+      </mh-nice-button>
+    </div>
+  </div>
+</form>

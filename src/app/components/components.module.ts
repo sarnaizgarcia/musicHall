@@ -26,6 +26,7 @@ import { PagGridComponent } from './pag-grid';
 import { FilterTagComponent } from './filter-tag';
 import { FiltersListComponent } from './filter-list';
 import { NiceSelectComponent } from './nice-select';
+import { SearchAlbumFormMobile } from './mobile-album-search-form';
 
 const components = [
   HomeLogoComponent,
@@ -48,7 +49,8 @@ const components = [
   PagGridComponent,
   FilterTagComponent,
   FiltersListComponent,
-  NiceSelectComponent
+  NiceSelectComponent,
+  SearchAlbumFormMobile
 ];
 
 @NgModule({

@@ -1,0 +1,26 @@
+.search-form-mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.select {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.filter {
+  margin: 25px;
+}
+
+.select-space {
+  width: 70%;
+}
+
+.button-space {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
