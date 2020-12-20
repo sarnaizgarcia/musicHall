@@ -245,6 +245,8 @@ export class ArtistComponent {
   }
 
   private showPopup (message: string, type: ModalTypes) {
+    const posX = window.scrollX;
+    window.scrollTo(posX, 0);
     this.loading = false;
     this.popUp = {
       message,

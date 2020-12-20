@@ -10,11 +10,13 @@ import { artistValidation } from './album-form.validations';
   templateUrl: './album-form.component.html',
   styleUrls: ['./album-form.component.css']
 })
+
 export class AlbumFormComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   private artistIdSelected: string | null = null;
   private lastArtistList: ArtistInfoForAlbum[] = [];
   private cleanlistArtistNamesRef = this.cleanArtistList.bind(this);
+  private firstShow = false;
 
   @Input()
   public initialData: Observable<AlbumDefaultData> | undefined;
@@ -97,6 +99,7 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
 
           this.artistIdSelected = value.artist.artistId;
           this.photo = value.cover;
+          this.firstShow = true;
         })
       );
     }
@@ -104,11 +107,13 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
     if (this.artistList) {
       this.subscriptions.push(
         this.artistList.subscribe((value: ArtistInfoForAlbum[]) => {
-          if (this.listArtistNames.length > 0 || this.artistIdSelected) {
+          if (this.listArtistNames.length > 0 || this.firstShow) {
             this.listArtistNames = [];
+            this.firstShow = false;
           } else {
             this.listArtistNames = value.map((artistData: ArtistInfoForAlbum) => artistData.artistName);
             this.lastArtistList = [...value];
+            this.artistIdSelected = null;
           }
         })
       );
