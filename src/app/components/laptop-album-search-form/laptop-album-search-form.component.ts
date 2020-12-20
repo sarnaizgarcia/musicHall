@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 import { ButtonColors, ButtonSizes } from '../nice-button';
 import { SearchAlbumData } from './laptop-album-search-form.entities';
@@ -9,7 +10,7 @@ import { SearchAlbumData } from './laptop-album-search-form.entities';
   styleUrls: ['./laptop-album-search-form.component.css']
 })
 
-export class SearchAlbumFormLaptop {
+export class SearchAlbumFormLaptop implements OnInit, OnDestroy{
 
   public artistFilter: string = '';
   public titleFilter: string = '';
@@ -21,6 +22,9 @@ export class SearchAlbumFormLaptop {
   @Input()
   public artistNamesList: string[] = [];
 
+  @Input()
+  public initialArtist: Observable<string> | undefined;
+
   @Output()
   public partialArtistName: EventEmitter<string> = new EventEmitter<string>();
 
@@ -30,6 +34,25 @@ export class SearchAlbumFormLaptop {
   @Output()
   public submitSearch: EventEmitter<SearchAlbumData> = new EventEmitter<SearchAlbumData>()
 
+  private subscriptions: Subscription[] = [];
+
+  ngOnInit() {
+    if (this.initialArtist) {
+      this.subscriptions.push(
+        this.initialArtist.subscribe((value: string | undefined) => {
+          if (value) {
+            this.artistFilter = value;
+          }
+        })
+      );
+    }
+  }
+
+  ngOnDestroy() {
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
+  }
 
   public artistSelected(artistName: string) {
     this.artistFilter = artistName;

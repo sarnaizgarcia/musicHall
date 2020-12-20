@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 import { ButtonColors, ButtonSizes } from '../nice-button';
 import { FilterData } from '../filter-tag';
@@ -8,7 +9,8 @@ import { FilterData } from '../filter-tag';
   templateUrl: './mobile-album-search-form.component.html',
   styleUrls: ['./mobile-album-search-form.component.css']
 })
-export class SearchAlbumFormMobile {
+
+export class SearchAlbumFormMobile implements OnInit, OnDestroy {
 
   public artistFilter: string = '';
   public albumFilter: string = '';
@@ -20,6 +22,9 @@ export class SearchAlbumFormMobile {
   @Input()
   public artistNamesList: string[] = [];
 
+  @Input()
+  public initialFilter: Observable<FilterData> | undefined;
+
   @Output()
   public searchArtistBy: EventEmitter<string> = new EventEmitter<string>();
 
@@ -28,6 +33,27 @@ export class SearchAlbumFormMobile {
 
   @Output()
   public submitFilter: EventEmitter<FilterData> = new EventEmitter<FilterData>();
+
+  private subscriptions: Subscription[] = [];
+
+  ngOnInit() {
+    if (this.initialFilter) {
+     this.subscriptions.push(
+       this.initialFilter
+       .subscribe((filter: FilterData | undefined) => {
+         if (filter) {
+          this.submitFilter.emit(filter);
+         }
+       })
+     );
+    }
+  }
+
+  ngOnDestroy() {
+    for(const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
+  }
 
   public artistSelected(artistName: string) {
     this.artistFilter = artistName;

@@ -8,6 +8,7 @@
   <div class="album-form">
     <mh-search-album-form-mobile
       [artistNamesList]="artistNamesList"
+      [initialFilter]="initalArtistFilter"
       (submitFilter)="updateFilterList('add', $event)"
       (searchArtistBy)="launchPartialArtistSearch($event)"
       (autocompleteOut)="cleanArtistListNames()"
@@ -17,6 +18,7 @@
 <div class="laptop-form">
   <mh-laptop-album-search-form
     [artistNamesList]="artistNamesList"
+    [initialArtist]="initialArtist"
     (partialArtistName)="launchPartialArtistSearch($event)"
     (autocompleteOut)="cleanArtistListNames()"
     (submitSearch)="launchSearch($event)"

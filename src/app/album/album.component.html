@@ -16,11 +16,11 @@
 <mh-modal-screen class="album-form" [show]="showAlbumForm">
   <mh-modal-window (closeWindow)="closeAlbumForm()">
     <mh-album-form
-    [artistList]="artistFormAutocompleteList"
-    (artistPartialSearch)="albumFormPartialSearch($event)"
-    (submitForm)="setAlbumData($event)"
-    (closeForm)="closeAlbumForm()"
-    [initialData]="albumInitialData"
+      [artistList]="artistFormAutocompleteList"
+      (artistPartialSearch)="albumFormPartialSearch($event)"
+      (submitForm)="setAlbumData($event)"
+      (closeForm)="closeAlbumForm()"
+      [initialData]="albumInitialData"
     ></mh-album-form>
   </mh-modal-window>
 </mh-modal-screen>
@@ -33,8 +33,10 @@
 ></mh-nav-bar>
 <div class="search-form">
   <mh-search-album-form
-  [artistNamesList]="artistSearchAutocompletList"
-  (artistPartialSearch)="albumSearchPartialSearch($event)"
+    [artistNamesList]="artistSearchAutocompletList"
+    [initialArtist]="initialArtist"
+    (artistPartialSearch)="albumSearchPartialSearch($event)"
+    (searchCriteria)="launchSearchAlbum($event)"
 ></mh-search-album-form>
 </div>
 <div class="album-separator">

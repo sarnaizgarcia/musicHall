@@ -152,14 +152,14 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
     const fileData = this.fileData;
     this.fileData = null;
     this.photo = null;
-    this.albumForm.reset()
+    this.albumForm.reset();
 
     this.submitForm.emit({
       ...formValue,
       artistId: this.artistIdSelected
         || this.lastArtistList.find(
           (artist: ArtistInfoForAlbum) => {
-            const artistNameForm = this.albumForm.get('artist')?.value;
+            const artistNameForm = formValue.artist
 
             return artist.artistName === artistNameForm;
           }

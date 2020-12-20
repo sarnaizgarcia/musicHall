@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { FilterData } from '../filter-tag';
 import { SearchAlbumData } from '../laptop-album-search-form';
@@ -16,11 +18,22 @@ export class SearchAlbumFormComponent {
   @Input()
   public artistNamesList: string[] = [];
 
+  @Input()
+  public initialArtist: Observable<string> | undefined;
+
   @Output()
-  public searchCritera: EventEmitter<SearchAlbumData> = new EventEmitter<SearchAlbumData>();
+  public searchCriteria: EventEmitter<SearchAlbumData> = new EventEmitter<SearchAlbumData>();
 
   @Output()
   public artistPartialSearch: EventEmitter<string> = new EventEmitter<string>();
+
+  public get initalArtistFilter(): Observable<FilterData> | undefined {
+    return (this.initialArtist)
+      ? this.initialArtist.pipe(
+        map((value: string): FilterData => ({ field: 'Artist', value }))
+      )
+      : undefined;
+  }
 
   public updateFilterList(action: 'add' | 'remove', filter: FilterData) {
     switch(action) {
@@ -47,7 +60,7 @@ export class SearchAlbumFormComponent {
   }
 
   public launchSearch( searchData: SearchAlbumData) {
-    this.searchCritera.emit(searchData);
+    this.searchCriteria.emit(searchData);
   }
 
   public launchPartialArtistSearch (artistName: string) {
@@ -55,7 +68,7 @@ export class SearchAlbumFormComponent {
   }
 
   public cleanArtistListNames () {
-    setTimeout(() => { this.artistNamesList = []; },0);
+    setTimeout(() => { this.artistNamesList = []; },200);
   }
 
   private addFilterToCriteria (filter: FilterData) {

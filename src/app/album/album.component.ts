@@ -1,18 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { concatMap, map } from 'rxjs/operators';
 
-import { AlbumData, AlbumDefaultData, ArtistInfoForAlbum, MessageTypes, ModalTypes, OptionType } from '../components';
-import { ArtistRepository, AlbumRepository, ArtistApp, ArtistFilters } from '../repositories';
+import {
+  AlbumData,
+  AlbumDefaultData,
+  ArtistInfoForAlbum,
+  MessageTypes,
+  ModalTypes,
+  OptionType,
+  SearchAlbumData
+} from '../components';
+import { ArtistRepository, AlbumRepository, ArtistApp, ArtistFilters, AlbumApp } from '../repositories';
 
 @Component({
   selector: 'mh-album',
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.css']
 })
-export class AlbumComponent {
+
+export class AlbumComponent implements OnInit {
 
   public menuOptions: OptionType[] = [ OptionType.ARTIST, OptionType.ALBUM ];
   public showAlbumForm: boolean = false;
@@ -27,6 +36,7 @@ export class AlbumComponent {
     year: '',
     gendre: ''
   });
+  public initialArtist: Subject<string> = new Subject<string>();
 
   public get messageType(): MessageTypes {
     return (this.popUp && this.popUp.type === ModalTypes.WARNING)
@@ -55,6 +65,27 @@ export class AlbumComponent {
     private albumRepo: AlbumRepository,
     private route: ActivatedRoute,
   ) {}
+
+  ngOnInit() {
+    const artistId = this.route.snapshot.paramMap.get('artistId');
+
+    if (artistId) {
+      this.loading = true;
+      this.artistRepo.searchArtist(artistId, ArtistFilters.ID)
+      .toPromise()
+      .then((value: ArtistApp[]) => {
+        this.loading = false;
+        this.initialArtist.next(value[0].name);
+      })
+      .catch((error) => {
+        console.log('Error searching artist: ', error);
+        this.showPopup(
+          'We could not obtain the artist information. Try again after 10 min',
+          ModalTypes.WARNING
+        );
+      })
+    }
+  }
 
   public goBack() {
     this.location.back();
@@ -188,6 +219,52 @@ export class AlbumComponent {
 
   public closePopup() {
     this.popUp = null;
+  }
+
+  public launchSearchAlbum(searchData: SearchAlbumData) {
+    this.loading = true
+    let search: Observable<AlbumApp[]> | null = null;
+
+    if (searchData.artist) {
+      search = this.searchAlbumWithArtist(searchData);
+    } else {
+      search = this.searchAlbumWithoutArtist(searchData);
+    }
+
+    search.toPromise()
+    .then((albums: AlbumApp[]) => {
+      this.loading = false;
+      console.log('NNN albums: ', albums);
+    })
+    .catch((error) => {
+      console.log('Error searching albums: ', error);
+      this.showPopup(
+        'We could not obtain the albums data. Try again in 10 min',
+        ModalTypes.WARNING
+      );
+    })
+  }
+
+  private searchAlbumWithArtist(searchData: SearchAlbumData): Observable<AlbumApp[]> {
+    return this.artistRepo.searchArtist(searchData.artist)
+      .pipe(
+        concatMap((artistList: ArtistApp[]) => {
+          const artistId = artistList[0].id || '';
+
+          return this.albumRepo.searchAlbum({
+            title: searchData.album,
+            genre: searchData.gendre,
+            artistId: artistId
+          })
+        })
+      );
+  }
+
+  private searchAlbumWithoutArtist(searchData: SearchAlbumData): Observable<AlbumApp[]> {
+    return this.albumRepo.searchAlbum({
+      title: searchData.album,
+      genre: searchData.gendre
+    });
   }
 
   private showPopup (message: string, type: ModalTypes) {
