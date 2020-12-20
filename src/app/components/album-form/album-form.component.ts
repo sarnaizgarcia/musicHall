@@ -163,7 +163,6 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
 
   private cleanArtistList(event: any) {
     if (event.target.name !== 'album-artist' && !event.target.classList.contains('autocomplete')) {
-      console.log('NNN event: ', event);
       this.listArtistNames = [];
     }
   }

@@ -29,7 +29,6 @@ export class AutocompleteComponent implements OnInit, OnDestroy{
       this.subscriptions.push(
         this.autocompleteResize
         .subscribe((value: string) => {
-          console.log('NNN value: ', value);
           this.autocompleteSize = value;
         })
       );
