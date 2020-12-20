@@ -12,8 +12,9 @@ export class FilterTagComponent {
 
   @Input()
   public filterData: FilterData = {
+    field: '',
     value: '',
-    field: ''
+
   };
 
   @Output()

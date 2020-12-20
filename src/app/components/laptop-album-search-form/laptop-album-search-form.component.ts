@@ -33,6 +33,7 @@ export class SearchAlbumFormLaptop {
 
   public artistSelected(artistName: string) {
     this.artistFilter = artistName;
+    this.autocompleteOut.emit();
   }
 
   public artistNameSearch(event: any) {

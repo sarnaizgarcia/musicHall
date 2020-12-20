@@ -1,0 +1,17 @@
+.mobile-form {
+  display: block;
+}
+
+.laptop-form {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .mobile-form {
+    display: none;
+  }
+
+  .laptop-form {
+    display: block;
+  }
+}

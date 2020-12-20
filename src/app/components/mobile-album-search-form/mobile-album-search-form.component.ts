@@ -15,12 +15,10 @@ export class SearchAlbumFormMobile {
   public gendreFilter: string = '';
   public buttonColor = ButtonColors.SECONDARY;
   public buttonSize = ButtonSizes.SMALL;
+  public filterSelected: 'artist' | 'album' | 'gendre' = 'artist';
 
   @Input()
   public artistNamesList: string[] = [];
-
-  @Input()
-  public filterSelected: 'artist' | 'album' | 'gendre' = 'artist';
 
   @Output()
   public searchArtistBy: EventEmitter<string> = new EventEmitter<string>();
@@ -33,6 +31,7 @@ export class SearchAlbumFormMobile {
 
   public artistSelected(artistName: string) {
     this.artistFilter = artistName;
+    this.autocompleteOut.emit();
   }
 
   public partialFilter(event: any) {

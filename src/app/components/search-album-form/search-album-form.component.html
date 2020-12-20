@@ -1,0 +1,24 @@
+<div class="mobile-form">
+  <div class="filter-list">
+    <mh-filters-list
+      [filters]="filterList"
+      (filterToRemove)="updateFilterList('remove', $event)"
+    ></mh-filters-list>
+  </div>
+  <div class="album-form">
+    <mh-search-album-form-mobile
+      [artistNamesList]="artistNamesList"
+      (submitFilter)="updateFilterList('add', $event)"
+      (searchArtistBy)="launchPartialArtistSearch($event)"
+      (autocompleteOut)="cleanArtistListNames()"
+    ></mh-search-album-form-mobile>
+  </div>
+</div>
+<div class="laptop-form">
+  <mh-laptop-album-search-form
+    [artistNamesList]="artistNamesList"
+    (partialArtistName)="launchPartialArtistSearch($event)"
+    (autocompleteOut)="cleanArtistListNames()"
+    (submitSearch)="launchSearch($event)"
+  ></mh-laptop-album-search-form>
+</div>

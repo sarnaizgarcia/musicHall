@@ -1,4 +1,4 @@
 export interface FilterData {
-  field: string;
+  field: 'Artist' | 'Album' | 'Gendre' | '';
   value: string;
 }

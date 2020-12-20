@@ -10,6 +10,7 @@
       >
       <mh-nice-input label="Search album by artist name">
           <input type="text"
+            autocomplete="off"
             name="artist-filter"
             [(ngModel)]="artistFilter"
             (input)="partialFilter($event)"

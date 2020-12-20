@@ -4,6 +4,7 @@
       <mh-autocomplete [valuesList]="artistNamesList" (valueSelected)="artistSelected($event)">
         <mh-nice-input label="Search album by artist name">
           <input
+            autocomplete="off"
             type="text"
             [(ngModel)]="artistFilter"
             (input)="artistNameSearch($event)"
