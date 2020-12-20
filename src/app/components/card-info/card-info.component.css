@@ -27,6 +27,11 @@
   overflow: hidden;
 }
 
+.card-image.album {
+  height: 200px;
+  margin: 10px 0px;
+}
+
 mat-card-content.mat-card-content.card-body {
   margin-bottom: 0px;
 }
@@ -59,4 +64,11 @@ mat-card-content.mat-card-content.card-body {
   background-image: url("../../../assets/img/bin-card-action.png");
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.card-body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  white-space: pre-wrap;
 }

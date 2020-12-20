@@ -4,12 +4,10 @@
     <mat-card-title>{{dataInput.title}}</mat-card-title>
     <mat-card-subtitle>{{dataInput.subtitle}}</mat-card-subtitle>
   </mat-card-header>
-  <div class="card-image">
+  <div class="card-image" [ngClass]="[dataInput.type]">
     <img mat-card-image [src]="dataInput.photo" [alt]="altMainImage" />
   </div>
-  <mat-card-content class="card-body">
-    {{dataInput.body}}
-  </mat-card-content>
+  <mat-card-content class="card-body" [innerHTML]="dataInput.body"></mat-card-content>
   <mat-card-actions class="actions">
     <div
       *ngFor="let action of dataInput.actions"

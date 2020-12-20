@@ -1,3 +1,5 @@
+import { SafeHtml } from "@angular/platform-browser";
+
 export enum CardActionTypes {
   ALBUMS = 'albums',
   EDIT = 'edit',
@@ -15,7 +17,7 @@ export interface CardDataInput {
   title: string,
   subtitle: string,
   photo: string,
-  body: string,
+  body: SafeHtml,
   actions: CardActionTypes[]
 }
 

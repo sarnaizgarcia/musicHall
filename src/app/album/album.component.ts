@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -8,6 +9,9 @@ import {
   AlbumData,
   AlbumDefaultData,
   ArtistInfoForAlbum,
+  CardActionTypes,
+  CardDataInput,
+  CardDefinitionType,
   MessageTypes,
   ModalTypes,
   OptionType,
@@ -37,6 +41,8 @@ export class AlbumComponent implements OnInit {
     gendre: ''
   });
   public initialArtist: Subject<string> = new Subject<string>();
+  public cardsList: CardDataInput[] = [];
+  public total = 0;
 
   public get messageType(): MessageTypes {
     return (this.popUp && this.popUp.type === ModalTypes.WARNING)
@@ -64,6 +70,7 @@ export class AlbumComponent implements OnInit {
     private artistRepo: ArtistRepository,
     private albumRepo: AlbumRepository,
     private route: ActivatedRoute,
+    private sanitazer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -231,10 +238,25 @@ export class AlbumComponent implements OnInit {
       search = this.searchAlbumWithoutArtist(searchData);
     }
 
-    search.toPromise()
-    .then((albums: AlbumApp[]) => {
+    search
+    .pipe(
+      map((albums: AlbumApp[]): CardDataInput[] => {
+        return albums.map((album: AlbumApp) => ({
+          id: album.id || '',
+          type: CardDefinitionType.ALBUM,
+          title: album.title,
+          subtitle: '',
+          photo: album.coverUrl,
+          body: this.sanitazer.bypassSecurityTrustHtml(`<ul><li>Year: ${album.year}</li><li>Gendre: ${album.genre}</li></ul>`),
+          actions: [ CardActionTypes.EDIT, CardActionTypes.DELETE ]
+        }))
+      })
+    )
+    .toPromise()
+    .then((albums: CardDataInput[]) => {
       this.loading = false;
-      console.log('NNN albums: ', albums);
+      this.cardsList = albums;
+      this.total = albums.length;
     })
     .catch((error) => {
       console.log('Error searching albums: ', error);

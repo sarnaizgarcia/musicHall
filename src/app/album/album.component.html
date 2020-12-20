@@ -42,3 +42,9 @@
 <div class="album-separator">
   <mh-separator (newElement)="openAlbumForm('create')"></mh-separator>
 </div>
+<div class="album-grid">
+  <mh-pag-grid
+    [cardsList]="cardsList"
+    [total]="total"
+  ></mh-pag-grid>
+</div>
