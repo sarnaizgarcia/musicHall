@@ -1,0 +1,9 @@
+.album-separator {
+  margin: 0px;
+}
+
+@media (min-width: 800px) {
+  .album-separator {
+    margin: 50px 0px;
+  }
+}

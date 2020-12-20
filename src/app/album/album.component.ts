@@ -13,6 +13,10 @@ import { OptionType } from '../components';
 export class AlbumComponent {
 
   public menuOptions: OptionType[] = [ OptionType.ARTIST, OptionType.ALBUM ];
+  public showAlbumForm: boolean = false;
+  public loading: boolean = false;
+
+  private actionOnAlbum: 'create' | 'update' = 'create';
 
   constructor(
     private location: Location,
@@ -31,5 +35,14 @@ export class AlbumComponent {
       case OptionType.ALBUM:
         this.router.navigateByUrl('/album');
     }
+  }
+
+  public closeAlbumForm() {
+    this.showAlbumForm = false;
+  }
+
+  public openAlbumForm(action: 'create' | 'update') {
+    this.actionOnAlbum = action;
+    this.showAlbumForm = true;
   }
 }
