@@ -1,12 +1,12 @@
 <div class="autocomplete-field">
   <ng-content></ng-content>
-  <ul class="list-values" *ngIf="areValues">
+  <ul class="list-values" *ngIf="areValues" [ngStyle]="{'width': autocompleteSize}">
     <li
-      class="value"
-      *ngFor="let value of valuesList"
+      class="autocomplete value"
+      *ngFor="let value of listValues"
       tabindex="0"
       (click)="onValueClick(value)"
       (keyup)="onValueEnter($event, value)"
-      >{{value}}</li>
+    >{{value}}</li>
   </ul>
 </div>

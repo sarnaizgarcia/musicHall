@@ -1,6 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
-
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import {
+  trigger,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { OptionType } from '../menu-option';
 
 @Component({
@@ -11,38 +15,37 @@ import { OptionType } from '../menu-option';
     trigger('openClose', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('1s ease-out', style({ opacity: 1 }))
+        animate('1s ease-out', style({opacity: 1}))
       ]),
       transition(':leave', [
-        style({ opacity: 1 }),
+        style({ opacity: 1}),
         animate('1s ease-in', style({ opacity: 0 }))
       ])
     ])
   ],
 })
 
-export class MenuButtonComponent implements OnInit, OnDestroy {
-
+export class MenuButtonComponent implements OnInit, OnDestroy{
   @Input()
   public menuOptions: OptionType[] = [];
 
   public open = false;
 
-  private context = this.hideMenu.bind(this);
+  private hiddenMenuReference = this.hiddeMenu.bind(this);
 
   @Output()
   public optionSelected: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
-    document.querySelector('body')?.addEventListener('click', this.context);
+    document.querySelector('body')?.addEventListener('click', this.hiddenMenuReference);
   }
 
   ngOnDestroy() {
-    document.querySelector('body')?.removeEventListener('click', this.context);
+    document.querySelector('body')?.removeEventListener('click', this.hiddenMenuReference);
   }
 
-  private hideMenu(event: any) {
-    if (event.target.id !== "menu-button") {
+  private hiddeMenu(event:any) {
+    if (event.target.tagName !== 'MAT-ICON') {
       this.open = false;
     }
   }
@@ -58,8 +61,7 @@ export class MenuButtonComponent implements OnInit, OnDestroy {
 
   public enterOnButton(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.open = !this.open;
+      this.open = !this.open
     }
   }
-
 }

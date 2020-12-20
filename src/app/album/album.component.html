@@ -3,7 +3,10 @@
 </mh-modal-screen>
 <mh-modal-screen class="album-form" [show]="showAlbumForm">
   <mh-modal-window (closeWindow)="closeAlbumForm()">
-    <mh-album-form></mh-album-form>
+    <mh-album-form
+      [artistList]="artistFormAutocompleteList"
+      (artistPartialSearch)="albumFormPartialSearch($event)"
+    ></mh-album-form>
   </mh-modal-window>
 </mh-modal-screen>
 <mh-nav-bar
@@ -12,7 +15,7 @@
   [options]="menuOptions"
   (goingBack)="goBack()"
   (optionSelected)="navigate($event)"
-  ></mh-nav-bar>
+></mh-nav-bar>
 <div class="search-form">
   <mh-search-album-form></mh-search-album-form>
 </div>

@@ -10,11 +10,11 @@ import { artistValidation } from './album-form.validations';
   templateUrl: './album-form.component.html',
   styleUrls: ['./album-form.component.css']
 })
-
 export class AlbumFormComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
   private artistIdSelected: string | null = null;
   private lastArtistList: ArtistInfoForAlbum[] = [];
+  private cleanlistArtistNamesRef = this.cleanArtistList.bind(this);
 
   @Input()
   public initialData: Observable<AlbumDefaultData> | undefined;
@@ -83,6 +83,8 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
   ngOnInit() {
     const artistInput = this.albumForm.get('artist');
 
+    document.querySelector('body')?.addEventListener('click', this.cleanlistArtistNamesRef);
+
     if (this.initialData) {
       this.subscriptions.push(
         this.initialData.subscribe((value: AlbumDefaultData) => {
@@ -100,8 +102,12 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
     if (this.artistList) {
       this.subscriptions.push(
         this.artistList.subscribe((value: ArtistInfoForAlbum[]) => {
-          this.listArtistNames = value.map((artistData: ArtistInfoForAlbum) => artistData.artistName);
-          this.lastArtistList = [...value];
+          if (this.listArtistNames.length > 0) {
+            this.listArtistNames = [];
+          } else {
+            this.listArtistNames = value.map((artistData: ArtistInfoForAlbum) => artistData.artistName);
+            this.lastArtistList = [...value];
+          }
         })
       );
     }
@@ -118,6 +124,7 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
+    document.querySelector('body')?.removeEventListener('click', this.cleanlistArtistNamesRef);
     for (const subscription of this.subscriptions) {
       subscription.unsubscribe();
     }
@@ -129,11 +136,6 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
 
   public artistSelected (artistName: string) {
     this.albumForm.get('artist')?.setValue(artistName);
-    this.listArtistNames = [];
-  }
-
-  public cleanArtistListNames () {
-    this.listArtistNames = [];
   }
 
   public onSubmitForm(event: Event) {
@@ -157,5 +159,12 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
 
   public clickOnCloseButton() {
     this.closeForm.emit();
+  }
+
+  private cleanArtistList(event: any) {
+    if (event.target.name !== 'album-artist' && !event.target.classList.contains('autocomplete')) {
+      console.log('NNN event: ', event);
+      this.listArtistNames = [];
+    }
   }
 }
