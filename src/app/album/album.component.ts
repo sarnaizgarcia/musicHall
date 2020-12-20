@@ -249,7 +249,7 @@ export class AlbumComponent implements OnInit {
         console.log('Error updating the album: ', error);
         this.showPopup(
           'We could not access to the album information. Try again after 10 min',
-          ModalTypes.WANRING
+          ModalTypes.WARNING
         );
       });
     }
@@ -335,7 +335,7 @@ export class AlbumComponent implements OnInit {
         console.log('Error searching for artist data: ', error);
         this.showPopup(
           'We could not obtain the artist info. Try again after 10 min',
-          ModalTypes.WANRING
+          ModalTypes.WARNING
         );
       })
     }
