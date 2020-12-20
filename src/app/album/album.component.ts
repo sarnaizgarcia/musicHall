@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -25,7 +25,6 @@ import { ArtistRepository, AlbumRepository, ArtistApp, ArtistFilters, AlbumApp }
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.css']
 })
-
 export class AlbumComponent implements OnInit {
 
   public menuOptions: OptionType[] = [ OptionType.ARTIST, OptionType.ALBUM ];
@@ -44,6 +43,11 @@ export class AlbumComponent implements OnInit {
   public initialArtist: Subject<string> = new Subject<string>();
   public cardsList: CardDataInput[] = [];
   public total = 0;
+  public validationMessage: string = '';
+  public validationTypes = {
+    modalType: ModalTypes.WARNING,
+    messageType: MessageTypes.WARNING
+  }
 
   public get messageType(): MessageTypes {
     return (this.popUp && this.popUp.type === ModalTypes.WARNING)
@@ -301,6 +305,7 @@ export class AlbumComponent implements OnInit {
   }
 
   public resolveCardAction (action: CardAction) {
+    const posX = window.scrollX;
     this.albumIdSelected = action.id;
 
     switch(action.action) {
@@ -308,8 +313,38 @@ export class AlbumComponent implements OnInit {
         this.launchUpdateAlbum();
       break;
       case 'delete':
-        console.log('Remove album');
+        window.scrollTo(posX, 0);
+        this.validationMessage = `
+        Are you sure about removing this album from your data?
+        `
       break;
+    }
+  }
+
+  public closeMessageValidation(answer = false) {
+    this.validationMessage = '';
+    if (answer && this.albumIdSelected) {
+      this.loading = true;
+      this.albumRepo.removeAlbum(this.albumIdSelected)
+      .toPromise()
+      .then(() => {
+        this.albumIdSelected = null;
+        this.showPopup(
+          'The album has been removed from the data base',
+          ModalTypes.SUCCESS
+        );
+
+        if (this.lastAlbumSearch) {
+          this.launchSearchAlbum(this.lastAlbumSearch);
+        }
+      })
+      .catch((error) => {
+        console.log('Error removing the album: ', error);
+        this.showPopup(
+          'We could not remove the album from the data base. Try again 10 min later',
+          ModalTypes.WARNING
+        );
+      })
     }
   }
 

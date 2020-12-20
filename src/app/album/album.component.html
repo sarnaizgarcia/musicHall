@@ -1,3 +1,16 @@
+<mh-modal-screen class="validation-message" [show]="validationMessage !== ''">
+  <mh-modal-window
+    [modalType]="validationTypes.modalType"
+    (closeWindow)="closeMessageValidation()"
+  >
+    <mh-modal-message
+      [message]="validationMessage"
+      [messageType]="validationTypes.messageType"
+      [validateAnswer]="true"
+      (answerMessage)="closeMessageValidation($event)"
+    ></mh-modal-message>
+  </mh-modal-window>
+</mh-modal-screen>
 <mh-modal-screen [show]="!!popUp">
   <mh-modal-window
     [modalType]="modalMessateType"
@@ -16,11 +29,11 @@
 <mh-modal-screen class="album-form" [show]="showAlbumForm">
   <mh-modal-window (closeWindow)="closeAlbumForm()">
     <mh-album-form
-      [artistList]="artistFormAutocompleteList"
-      (artistPartialSearch)="albumFormPartialSearch($event)"
-      (submitForm)="setAlbumData($event)"
-      (closeForm)="closeAlbumForm()"
-      [initialData]="albumInitialData"
+    [artistList]="artistFormAutocompleteList"
+    (artistPartialSearch)="albumFormPartialSearch($event)"
+    (submitForm)="setAlbumData($event)"
+    (closeForm)="closeAlbumForm()"
+    [initialData]="albumInitialData"
     ></mh-album-form>
   </mh-modal-window>
 </mh-modal-screen>
@@ -37,7 +50,7 @@
     [initialArtist]="initialArtist"
     (artistPartialSearch)="albumSearchPartialSearch($event)"
     (searchCriteria)="launchSearchAlbum($event)"
-></mh-search-album-form>
+  ></mh-search-album-form>
 </div>
 <div class="album-separator">
   <mh-separator (newElement)="openAlbumForm('create')"></mh-separator>

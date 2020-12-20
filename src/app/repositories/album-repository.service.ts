@@ -127,8 +127,12 @@ export class AlbumRepository {
     return result;
   }
 
+  public removeAlbum (albumId: string): Observable<any> {
+    return this.dataSource.request(`album/${albumId}`, VerbTypes.DELETE);
+  }
+
   private artistIdFilter (album: AlbumApp, artistId: string): boolean {
-    return album.artistId === artistId
+    return album.artistId === artistId;
   }
 
   private titleFilter (album: AlbumApp, title: string): boolean {
