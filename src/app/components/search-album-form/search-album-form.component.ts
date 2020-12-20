@@ -55,7 +55,7 @@ export class SearchAlbumFormComponent {
   }
 
   public cleanArtistListNames () {
-    this.artistNamesList = [];
+    setTimeout(() => { this.artistNamesList = []; },0);
   }
 
   private addFilterToCriteria (filter: FilterData) {

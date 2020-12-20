@@ -4,11 +4,16 @@
   >
   <div class="filter text">
     <mh-autocomplete
+      [autocompleteResize]="autocompleteInput"
       [listValues]="artistNamesList"
       (valueSelected)="artistSelected($event)"
       *ngIf="filterSelected === 'artist'"
       >
-      <mh-nice-input label="Search album by artist name">
+      <mh-nice-input
+        label="Search album by artist name"
+        #autocompleteInput
+        [emitWidth]="true"
+        >
           <input type="text"
             autocomplete="off"
             name="artist-filter"

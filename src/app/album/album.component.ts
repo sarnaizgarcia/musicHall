@@ -18,6 +18,7 @@ export class AlbumComponent {
   public showAlbumForm: boolean = false;
   public loading: boolean = false;
   public artistFormAutocompleteList: BehaviorSubject<ArtistInfoForAlbum[]> = new BehaviorSubject<ArtistInfoForAlbum[]>([]);
+  public artistSearchAutocompletList: string[] = [];
   public popUp: { message: string; type: ModalTypes } | null = null;
   public albumInitialData: BehaviorSubject<AlbumDefaultData> = new BehaviorSubject<AlbumDefaultData>({
     title: '',
@@ -132,6 +133,25 @@ export class AlbumComponent {
           ModalTypes.WARNING
         );
       });
+  }
+
+  public albumSearchPartialSearch(artistName: string) {
+    this.artistRepo.searchArtist(artistName)
+      .pipe(
+        map((artistList: ArtistApp[]) => artistList
+        .map((artist: ArtistApp) => artist.name))
+      )
+      .toPromise()
+      .then((artistNames: string[]) => {
+        this.artistSearchAutocompletList = [...artistNames];
+      })
+      .catch((error) => {
+        console.log('Error searching artist by name: ', error);
+        this.showPopup(
+          'We could not obtain the artist info. Try again in 10 min',
+          ModalTypes.WARNING
+        );
+      })
   }
 
   public setAlbumData(albumData: AlbumData) {

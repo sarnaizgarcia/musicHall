@@ -24,7 +24,7 @@ export class NiceInputComponent extends BehaviorSubject<string> {
   }
 
   constructor(){
-    super('596px');
+    super('250px');
   }
 
   @HostListener('window:resize', ['$event.target'])

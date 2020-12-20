@@ -32,7 +32,10 @@
   (optionSelected)="navigate($event)"
 ></mh-nav-bar>
 <div class="search-form">
-  <mh-search-album-form></mh-search-album-form>
+  <mh-search-album-form
+  [artistNamesList]="artistSearchAutocompletList"
+  (artistPartialSearch)="albumSearchPartialSearch($event)"
+></mh-search-album-form>
 </div>
 <div class="album-separator">
   <mh-separator (newElement)="openAlbumForm('create')"></mh-separator>
