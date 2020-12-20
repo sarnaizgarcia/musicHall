@@ -1,4 +1,5 @@
 export interface AlbumData {
+  id?: string,
   title: string;
   artistId: string;
   cover: File;

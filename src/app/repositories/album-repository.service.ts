@@ -89,6 +89,44 @@ export class AlbumRepository {
       )
   }
 
+  public updateAlbum (albumData: AlbumBase, fileData: File | string): Observable<any> {
+    if (!albumData.id) {
+      throw new Error ('Id is required to update album data');
+    }
+
+    let fileExtension = '';
+    let filePath = '';
+    let fileType = '';
+
+    if (typeof fileData === 'string') {
+      filePath = new URL(fileData).pathname;
+    } else {
+      fileExtension = fileData.name.split('.')[1];
+      filePath = `album/${albumData.title}_${albumData.year}_${new Date().getTime()}.${fileExtension}`.replace(/\s/g, '-');
+      fileType = fileData.type;
+    }
+
+    let result = this.dataSource.request(
+      `album/${albumData.id}`,
+      VerbTypes.PUT,
+      {
+        title: albumData.title,
+        artistId: albumData.artistId,
+        coverUrl: filePath,
+        year: albumData.year,
+        genre: albumData.genre
+      }
+    );
+
+    if (typeof fileData !== 'string') {
+      result = result.pipe(
+        concatMap(() => this.fileBucket.sendFile(`upload/${filePath}`, fileData, fileType))
+      );
+    }
+
+    return result;
+  }
+
   private artistIdFilter (album: AlbumApp, artistId: string): boolean {
     return album.artistId === artistId
   }

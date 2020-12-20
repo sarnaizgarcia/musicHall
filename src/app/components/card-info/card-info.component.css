@@ -68,7 +68,7 @@ mat-card-content.mat-card-content.card-body {
 
 .card-body {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   white-space: pre-wrap;
 }

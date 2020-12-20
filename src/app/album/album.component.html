@@ -46,5 +46,6 @@
   <mh-pag-grid
     [cardsList]="cardsList"
     [total]="total"
+    (cardAction)="resolveCardAction($event)"
   ></mh-pag-grid>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -15,7 +15,8 @@ import {
   MessageTypes,
   ModalTypes,
   OptionType,
-  SearchAlbumData
+  SearchAlbumData,
+  CardAction
 } from '../components';
 import { ArtistRepository, AlbumRepository, ArtistApp, ArtistFilters, AlbumApp } from '../repositories';
 
@@ -63,6 +64,9 @@ export class AlbumComponent implements OnInit {
   }
 
   private actionOnAlbum: 'create' | 'update' = 'create';
+  private albumAppList: AlbumApp[] = [];
+  private albumIdSelected: string | null = null;
+  private lastAlbumSearch: SearchAlbumData | null = null;
 
   constructor(
     private location: Location,
@@ -220,7 +224,34 @@ export class AlbumComponent implements OnInit {
         );
       })
     } else {
-      console.log('NNN Update album');
+      this.albumRepo.updateAlbum({
+        id: this.albumIdSelected || '',
+        title: albumData.title,
+        artistId: albumData.artistId,
+        year: albumData.year,
+        genre: albumData.gendre
+      },
+        albumData.cover || this.albumAppList.find((album: AlbumApp) => album.id === this.albumIdSelected)?.coverUrl
+      )
+      .toPromise()
+      .then(() => {
+        this.albumIdSelected = null;
+        this.showPopup(
+          `The data of the album ${albumData.title} has been updated`,
+          ModalTypes.SUCCESS
+        );
+
+        if (this.lastAlbumSearch) {
+          this.launchSearchAlbum(this.lastAlbumSearch);
+        }
+      })
+      .catch((error) => {
+        console.log('Error updating the album: ', error);
+        this.showPopup(
+          'We could not access to the album information. Try again after 10 min',
+          ModalTypes.WANRING
+        );
+      });
     }
   }
 
@@ -232,6 +263,7 @@ export class AlbumComponent implements OnInit {
     this.loading = true
     let search: Observable<AlbumApp[]> | null = null;
 
+    this.lastAlbumSearch = searchData;
     if (searchData.artist) {
       search = this.searchAlbumWithArtist(searchData);
     } else {
@@ -241,6 +273,7 @@ export class AlbumComponent implements OnInit {
     search
     .pipe(
       map((albums: AlbumApp[]): CardDataInput[] => {
+        this.albumAppList = albums;
         return albums.map((album: AlbumApp) => ({
           id: album.id || '',
           type: CardDefinitionType.ALBUM,
@@ -265,6 +298,47 @@ export class AlbumComponent implements OnInit {
         ModalTypes.WARNING
       );
     })
+  }
+
+  public resolveCardAction (action: CardAction) {
+    this.albumIdSelected = action.id;
+
+    switch(action.action) {
+      case 'edit':
+        this.launchUpdateAlbum();
+      break;
+      case 'delete':
+        console.log('Remove album');
+      break;
+    }
+  }
+
+  private launchUpdateAlbum() {
+    const selectedAlbum = this.albumAppList.find((album: AlbumApp) => album.id === this.albumIdSelected);
+
+    if (selectedAlbum) {
+      this.loading = true
+      this.artistRepo.searchArtist(selectedAlbum.artistId, ArtistFilters.ID)
+      .toPromise()
+      .then((artist: ArtistApp[]) => {
+        this.loading = false;
+        this.openAlbumForm('update');
+        this.albumInitialData.next({
+          title: selectedAlbum.title,
+          artist: { artistId: artist[0].id || '', artistName: artist[0].name },
+          cover: selectedAlbum.coverUrl,
+          year: selectedAlbum.year,
+          gendre: selectedAlbum.genre
+        })
+      })
+      .catch((error) => {
+        console.log('Error searching for artist data: ', error);
+        this.showPopup(
+          'We could not obtain the artist info. Try again after 10 min',
+          ModalTypes.WANRING
+        );
+      })
+    }
   }
 
   private searchAlbumWithArtist(searchData: SearchAlbumData): Observable<AlbumApp[]> {
