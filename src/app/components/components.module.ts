@@ -27,6 +27,7 @@ import { FilterTagComponent } from './filter-tag';
 import { FiltersListComponent } from './filter-list';
 import { NiceSelectComponent } from './nice-select';
 import { SearchAlbumFormMobile } from './mobile-album-search-form';
+import { SearchAlbumFormLaptop } from './laptop-album-search-form';
 
 const components = [
   HomeLogoComponent,
@@ -50,7 +51,8 @@ const components = [
   FilterTagComponent,
   FiltersListComponent,
   NiceSelectComponent,
-  SearchAlbumFormMobile
+  SearchAlbumFormMobile,
+  SearchAlbumFormLaptop
 ];
 
 @NgModule({

@@ -8,3 +8,4 @@ export { CardActionTypes, CardDefinitionType, CardDataInput, CardAction } from '
 export { PaginationEvent } from './pag-grid';
 export { MessageTypes } from './modal-message';
 export { FilterData } from './filter-tag';
+export { SearchAlbumData } from './laptop-album-search-form';

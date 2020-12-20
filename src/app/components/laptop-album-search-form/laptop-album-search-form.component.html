@@ -1,0 +1,32 @@
+<form class="album-search" (submit)="onSubmitForm($event)">
+  <div class="fields">
+    <div class="field">
+      <mh-autocomplete [valuesList]="artistNamesList" (valueSelected)="artistSelected($event)">
+        <mh-nice-input label="Search album by artist name">
+          <input
+            type="text"
+            [(ngModel)]="artistFilter"
+            (input)="artistNameSearch($event)"
+            (blur)="blurOnAutocomplete()"
+            name="artist-name"
+          />
+        </mh-nice-input>
+      </mh-autocomplete>
+    </div>
+    <div class="field">
+      <mh-nice-input label="Search album by title">
+        <input type="text" [(ngModel)]="titleFilter" name="album-title"/>
+      </mh-nice-input>
+    </div>
+    <div class="field">
+      <mh-nice-input label="Search album by gendre">
+        <input type="text" [(ngModel)]="gendreFilter" name="music-gendre"/>
+      </mh-nice-input>
+    </div>
+  </div>
+  <div class="button">
+    <mh-nice-button [color]="buttonColor" [size]="buttonSize">
+      <button type="submit">Search</button>
+    </mh-nice-button>
+  </div>
+</form>
