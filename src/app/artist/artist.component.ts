@@ -183,7 +183,7 @@ export class ArtistComponent {
 
     switch(action.action) {
       case 'albums':
-        console.log('Navigate to artist albums: ', action);
+        this.router.navigateByUrl(`/album/${action.id}`)
       break;
       case 'edit':
         this.launchUpdateArtist();

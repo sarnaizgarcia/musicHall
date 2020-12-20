@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
-import { FilterData } from '../components';
+import { OptionType } from '../components';
 
 @Component({
   selector: 'mh-album',
@@ -10,22 +12,24 @@ import { FilterData } from '../components';
 
 export class AlbumComponent {
 
-  public filterData: FilterData[] = [
-    {
-      field: 'Artist',
-      value: 'Leonard Cohen'
-    },
-    {
-      field: 'Gendre',
-      value: 'Singer-songwriter'
-    },
-    {
-      field: 'Album',
-      value: 'Thanks for the dance'
-    }
-  ];
+  public menuOptions: OptionType[] = [ OptionType.ARTIST, OptionType.ALBUM ];
 
-  public logEvent(event?: any) {
-    console.log('NNN event fired: ', event);
+  constructor(
+    private location: Location,
+    private router: Router,
+  ) {}
+
+  public goBack() {
+    this.location.back();
+  }
+
+  public navigate(page: string) {
+    switch(page) {
+      case OptionType.ARTIST:
+        this.router.navigateByUrl('/artist');
+      break;
+      case OptionType.ALBUM:
+        this.router.navigateByUrl('/album');
+    }
   }
 }

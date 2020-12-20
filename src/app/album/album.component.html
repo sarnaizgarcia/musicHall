@@ -1,5 +1,8 @@
-<mh-modal-screen [show]="true">
-  <mh-modal-window>
-    <mh-album-form></mh-album-form>
-  </mh-modal-window>
-</mh-modal-screen>
+<mh-nav-bar
+  navText="Albums"
+  [showBack]="true"
+  [options]="menuOptions"
+  (goingBack)="goBack()"
+  (optionSelected)="navigate($event)"
+  >
+</mh-nav-bar>
