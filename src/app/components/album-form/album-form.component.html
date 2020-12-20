@@ -1,0 +1,38 @@
+<div class="album-form">
+  <mh-upload-file
+    class="field upload"
+    [imageContent]="photo"
+    (imageSelected)="setImageData($event)"
+  ></mh-upload-file>
+  <form class="fields-form" (submit)="onSubmitForm($event)" [formGroup]="albumForm">
+    <mh-nice-input class="field" label="Album title*" [errorMsg]="validationsError.title">
+      <input type="text" name="album-title" required formControlName="title" />
+    </mh-nice-input>
+    <mh-autocomplete class="field" [valuesList]="listArtistNames" (valueSelected)="artistSelected($event)">
+      <mh-nice-input label="Artist*" [errorMsg]="validationsError.artist">
+        <input
+          type="text"
+          name="album-artist"
+          required
+          autocomplete="off"
+          (blur)="cleanArtistListNames()"
+          formControlName="artist"
+        />
+      </mh-nice-input>
+    </mh-autocomplete>
+    <mh-nice-input class="field" label="Year*" [errorMsg]="validationsError.year">
+      <input type="text" name="album-year" required formControlName="year" />
+    </mh-nice-input>
+    <mh-nice-input class="field" label="Gendre*" [errorMsg]="validationsError.gendre">
+      <input type="text" name="album-gendre" required formControlName="gendre" />
+    </mh-nice-input>
+    <div class="buttons">
+      <mh-nice-button class="button">
+        <button type="button" (click)="clickOnCloseButton()">Close</button>
+      </mh-nice-button>
+      <mh-nice-button class="button" [disabled]="!albumForm.valid || (!fileData && !photo)" [color]="mainButtonColor">
+        <button type="submit" [disabled]="!albumForm.valid || (!fileData && !photo)">Save</button>
+      </mh-nice-button>
+    </div>
+  </form>
+</div>

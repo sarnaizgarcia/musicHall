@@ -9,3 +9,4 @@ export { PaginationEvent } from './pag-grid';
 export { MessageTypes } from './modal-message';
 export { FilterData } from './filter-tag';
 export { SearchAlbumData } from './laptop-album-search-form';
+export { AlbumData, AlbumDefaultData, ArtistInfoForAlbum } from './album-form';

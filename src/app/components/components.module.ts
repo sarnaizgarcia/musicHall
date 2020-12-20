@@ -29,6 +29,7 @@ import { NiceSelectComponent } from './nice-select';
 import { SearchAlbumFormMobile } from './mobile-album-search-form';
 import { SearchAlbumFormLaptop } from './laptop-album-search-form';
 import { SearchAlbumFormComponent } from './search-album-form';
+import { AlbumFormComponent } from './album-form';
 
 const components = [
   HomeLogoComponent,
@@ -54,7 +55,8 @@ const components = [
   NiceSelectComponent,
   SearchAlbumFormMobile,
   SearchAlbumFormLaptop,
-  SearchAlbumFormComponent
+  SearchAlbumFormComponent,
+  AlbumFormComponent
 ];
 
 @NgModule({

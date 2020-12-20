@@ -42,6 +42,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   public onFileDropped(event: FileList) {
     this.fileSelected = event[0];
     this.reader.readAsDataURL(event[0]);
+    this.imageSelected.emit(event[0]);
   }
 
   public clickOnFileUpload() {

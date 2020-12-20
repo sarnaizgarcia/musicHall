@@ -1,6 +1,5 @@
-<mh-laptop-album-search-form
-  (partialArtistName)="logEvent($event)"
-  (autocompleteOut)="logEvent($event)"
-  (submitSearch)="logEvent($event)"
-  >
-</mh-laptop-album-search-form>
+<mh-modal-screen [show]="true">
+  <mh-modal-window>
+    <mh-album-form></mh-album-form>
+  </mh-modal-window>
+</mh-modal-screen>
