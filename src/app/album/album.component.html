@@ -1,11 +1,26 @@
+<mh-modal-screen [show]="!!popUp">
+  <mh-modal-window
+    [modalType]="modalMessateType"
+    (closeWindow)="closePopup()"
+  >
+    <mh-modal-message
+      [message]="modalMessateText"
+      [messageType]="messageType"
+      (answerMessage)="closePopup()"
+    ></mh-modal-message>
+  </mh-modal-window>
+</mh-modal-screen>
 <mh-modal-screen [show]="loading">
   <mh-loading></mh-loading>
 </mh-modal-screen>
 <mh-modal-screen class="album-form" [show]="showAlbumForm">
   <mh-modal-window (closeWindow)="closeAlbumForm()">
     <mh-album-form
-      [artistList]="artistFormAutocompleteList"
-      (artistPartialSearch)="albumFormPartialSearch($event)"
+    [artistList]="artistFormAutocompleteList"
+    (artistPartialSearch)="albumFormPartialSearch($event)"
+    (submitForm)="setAlbumData($event)"
+    (closeForm)="closeAlbumForm()"
+    [initialData]="albumInitialData"
     ></mh-album-form>
   </mh-modal-window>
 </mh-modal-screen>

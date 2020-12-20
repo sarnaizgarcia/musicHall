@@ -4,7 +4,7 @@
   >
   <div class="filter text">
     <mh-autocomplete
-      [valuesList]="artistNamesList"
+      [listValues]="artistNamesList"
       (valueSelected)="artistSelected($event)"
       *ngIf="filterSelected === 'artist'"
       >

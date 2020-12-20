@@ -1,7 +1,7 @@
 <form class="album-search" (submit)="onSubmitForm($event)">
   <div class="fields">
     <div class="field">
-      <mh-autocomplete [valuesList]="artistNamesList" (valueSelected)="artistSelected($event)">
+      <mh-autocomplete [listValues]="artistNamesList" (valueSelected)="artistSelected($event)">
         <mh-nice-input label="Search album by artist name">
           <input
             autocomplete="off"

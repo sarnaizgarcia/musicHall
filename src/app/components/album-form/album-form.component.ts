@@ -89,8 +89,10 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
       this.subscriptions.push(
         this.initialData.subscribe((value: AlbumDefaultData) => {
           this.albumForm.setValue({
-            ...value,
+            title: value.title,
             artist: value.artist.artistName,
+            year: value.year,
+            gendre: value.gendre
           });
 
           this.artistIdSelected = value.artist.artistId;
@@ -102,7 +104,7 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
     if (this.artistList) {
       this.subscriptions.push(
         this.artistList.subscribe((value: ArtistInfoForAlbum[]) => {
-          if (this.listArtistNames.length > 0) {
+          if (this.listArtistNames.length > 0 || this.artistIdSelected) {
             this.listArtistNames = [];
           } else {
             this.listArtistNames = value.map((artistData: ArtistInfoForAlbum) => artistData.artistName);
@@ -141,8 +143,14 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
   public onSubmitForm(event: Event) {
     event.preventDefault();
 
+    const formValue = {...this.albumForm.value };
+    const fileData = this.fileData;
+    this.fileData = null;
+    this.photo = null;
+    this.albumForm.reset()
+
     this.submitForm.emit({
-      ...this.albumForm.value,
+      ...formValue,
       artistId: this.artistIdSelected
         || this.lastArtistList.find(
           (artist: ArtistInfoForAlbum) => {
@@ -150,11 +158,9 @@ export class AlbumFormComponent implements OnInit, OnDestroy{
 
             return artist.artistName === artistNameForm;
           }
-        ),
-      cover: this.fileData
+        )?.artistId,
+      cover: fileData
     });
-
-    this.fileData = null;
   }
 
   public clickOnCloseButton() {

@@ -1,3 +1,8 @@
+export enum ArtistFilters {
+  NAME = 'nameFilter',
+  ID = 'idFilter'
+}
+
 export interface ArtistDataBase {
   _id: string;
   name: string;

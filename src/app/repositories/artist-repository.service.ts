@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 
 import { KenjoDataSource, VerbTypes,FileBucketDataSource } from '../datasources';
-import { ArtistApp, ArtistDataBase, ArtistBase} from './repositories.entities';
+import { ArtistApp, ArtistDataBase, ArtistBase, ArtistFilters} from './repositories.entities';
 import { ConfigApp } from '../utils';
 import { APP_CONFIG } from '../app.module';
 
@@ -19,13 +19,13 @@ export class ArtistRepository {
     @Inject(APP_CONFIG) private configApp: Observable<ConfigApp>,
   ){}
 
-  public searchArtist(artistName: string): Observable<ArtistApp[]> {
+  public searchArtist(valueToFilter: string, filter= ArtistFilters.NAME): Observable<ArtistApp[]> {
     return this.dataSource.request('artists/all', VerbTypes.GET).pipe(
       map((response: Object) => {
         const artistList = (response as ArtistDataBase[]);
 
         return artistList
-          .filter((artistDb: ArtistDataBase) => (artistDb.name.indexOf(artistName) > -1))
+          .filter((artistDb: ArtistDataBase) => this[filter](artistDb, valueToFilter))
           .map((artistDb: ArtistDataBase) => ({
             id: artistDb._id,
             name: artistDb.name,
@@ -120,5 +120,13 @@ export class ArtistRepository {
     const year = date.getFullYear();
 
     return `${(day < 10) ? `0${day}`: day}/${(month < 10) ? `0${month}`: month}/${year}`;
+  }
+
+  private nameFilter (artistData: ArtistDataBase, name: string): boolean {
+    return artistData.name.indexOf(name) > -1;
+  }
+
+  private idFilter (artistData: ArtistDataBase, id: string): boolean {
+    return artistData._id === id;
   }
 }
