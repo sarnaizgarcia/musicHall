@@ -1,9 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, concatMap } from 'rxjs/operators';
+import { Observable, iif, from, of } from 'rxjs';
+import { map, concatMap, mergeMap } from 'rxjs/operators';
 
 import { KenjoDataSource, VerbTypes,FileBucketDataSource } from '../datasources';
-import { ArtistApp, ArtistDataBase, ArtistBase, ArtistFilters} from './repositories.entities';
+import { ArtistApp, ArtistDataBase, ArtistBase, ArtistFilters, AlbumApp} from './repositories.entities';
+import { AlbumRepository } from './album-repository.service';
 import { ConfigApp } from '../utils';
 import { APP_CONFIG } from '../app.module';
 
@@ -16,6 +17,7 @@ export class ArtistRepository {
   constructor(
     private dataSource: KenjoDataSource,
     private fileBucket: FileBucketDataSource,
+    private albumRepo: AlbumRepository,
     @Inject(APP_CONFIG) private configApp: Observable<ConfigApp>,
   ){}
 
@@ -111,7 +113,19 @@ export class ArtistRepository {
   }
 
   public deleteArtist(id: string): Observable<any> {
-    return this.dataSource.request(`/artist/${id}`, VerbTypes.DELETE);
+    return this.albumRepo.searchAlbum({ artistId: id})
+      .pipe(
+        concatMap((albumsList: AlbumApp[]) =>
+          iif(
+            () => albumsList.length > 0,
+            from(albumsList).pipe(
+              mergeMap((album: AlbumApp) => this.albumRepo.removeAlbum(album.id || ''))
+            ),
+            of('ok')
+          )
+        ),
+        concatMap(() => this.dataSource.request(`artist/${id}`, VerbTypes.DELETE))
+      )
   }
 
   private formatDate(date: Date) {

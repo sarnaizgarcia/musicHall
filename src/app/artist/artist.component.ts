@@ -200,6 +200,8 @@ export class ArtistComponent {
   }
 
   private launchDeleteArtist() {
+    const posX = window.scrollX;
+    window.scrollTo(posX, 0);
     this.validationMessage = 'Are sure about to remove this artist from your collection?';
   }
 
