@@ -134,13 +134,15 @@ export class AlbumComponent implements OnInit {
       )
       .toPromise()
       .then((value: ArtistInfoForAlbum) => {
-        this.albumInitialData.next({
-          title: '',
-          artist: value,
-          cover: '',
-          year: '',
-          gendre: ''
-        })
+        if (action === 'create') {
+          this.albumInitialData.next({
+            title: '',
+            artist: value,
+            cover: '',
+            year: '',
+            gendre: ''
+          });
+        }
 
         this.loading = false;
         this.actionOnAlbum = action;
